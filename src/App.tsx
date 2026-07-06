@@ -1,122 +1,175 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeTab, setActiveTab] = useState<'grading' | 'analytics' | 'admin'>('grading');
+
+  const previewContent = {
+    grading: {
+      title: "AI Grading Assistant",
+      desc: "Scans essays and open-ended exams to provide instant rubric-based evaluation drafts, saving educators up to 15 hours per week.",
+      stat: "70% reduction in grading turnaround"
+    },
+    analytics: {
+      title: "Predictive Student Insights",
+      desc: "Analyzes early drops in submission velocity and attendance patterns, flagging at-risk students weeks before final exams.",
+      stat: "Identify learning risks 3-4 weeks earlier"
+    },
+    admin: {
+      title: "Smart Administration",
+      desc: "Optimizes complex master timetables across departments, automates parent FAQs, and models seasonal cash flows.",
+      stat: "85% administrative workflows automated"
+    }
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="landing-container">
+      {/* NAVIGATION */}
+      <nav className="navbar">
+        <div className="nav-logo">
+          <span className="logo-icon">🧠</span>
+          <strong>brainCampus</strong>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
+
+        <div className="nav-links">
+          <a href="#features">Features</a>
+          <a href="#preview">Product Tour</a>
+          <a href="#pricing">Pricing</a>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+
+        <a href="#demo" className="btn-primary">Request Access</a>
+      </nav>
+
+      {/* HERO */}
+      <header className="hero-section">
+        <div className="badge">✨ AI-First School OS</div>
+
+        <h1>
+          The Operating System<br />
+          <span className="gradient-text">for Modern Education</span>
+        </h1>
+
+        <p className="hero-subtext">
+          Automate administration, personalize learning pathways, and predict institutional outcomes with secure, 
+          compliant AI infrastructure built for K-12 and higher education.
+        </p>
+
+        <div className="cta-group">
+          <a href="#demo" className="btn-primary">Book Institutional Demo</a>
+          <a href="#preview" className="btn-secondary">Watch 2-min Tour</a>
+        </div>
+
+        <div className="hero-social-proof">
+          <span className="stars">★★★★★</span>
+          <span>Trusted by 2,000+ academies worldwide</span>
+        </div>
+
+        {/* Hero Dashboard Preview */}
+        <div className="hero-banner-container">
+          <div className="banner-window-frame">
+            <div className="frame-header">
+              <div className="frame-dots">
+                <span className="frame-dot"></span>
+                <span className="frame-dot"></span>
+                <span className="frame-dot"></span>
+              </div>
+              <div className="frame-url">app.braincampus.com/dashboard</div>
+            </div>
+            <div className="banner-image-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+                alt="brainCampus Dashboard"
+                className="actual-product-banner"
+              />
+              <div className="banner-overlay-card">
+                <span className="pulse-dot"></span>
+                <strong>Live Campus Intelligence</strong>
+                <p>Real-time insights across students, staff, and operations</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* INTERACTIVE PREVIEW */}
+      <section id="preview" className="preview-section">
+        <div className="section-header">
+          <h2>See the Intelligence in Action</h2>
+          <p>Switch between core AI engines powering modern schools</p>
+        </div>
+
+        <div className="preview-box">
+          <div className="preview-tabs">
+            {Object.keys(previewContent).map((tab) => (
+              <button
+                key={tab}
+                className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                onClick={() => setActiveTab(tab as 'grading' | 'analytics' | 'admin')}
+              >
+                {previewContent[tab as keyof typeof previewContent].title.split(' ')[0]}
+              </button>
+            ))}
+          </div>
+
+          <div className="preview-display">
+            <div className="mock-window">
+              <div className="mock-header">
+                <div className="frame-dots">
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                </div>
+                <div className="mock-url">braincampus.edu/ai-{activeTab}</div>
+              </div>
+
+              <div className="mock-body">
+                <h3>{previewContent[activeTab].title}</h3>
+                <p>{previewContent[activeTab].desc}</p>
+                <div className="mock-metric">
+                  <strong>Impact:</strong> {previewContent[activeTab].stat}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section id="features" className="features-section">
+        <div className="section-header">
+          <h2>Built for Every Layer of Education</h2>
+          <p>One unified platform replacing fragmented legacy systems</p>
+        </div>
+
+        <div className="features-grid">
+          {[
+            { icon: "📊", title: "Predictive Student Models", desc: "Cross-references engagement metrics to identify at-risk students early." },
+            { icon: "🗓️", title: "Intelligent Scheduling", desc: "Automatically generates conflict-free timetables respecting all constraints." },
+            { icon: "💳", title: "Cash Flow Intelligence", desc: "Dynamic forecasting and automated receivables management." },
+            { icon: "💬", title: "Smart Family Communication", desc: "Handles routine inquiries 24/7 with contextual, accurate responses." }
+          ].map((feature, i) => (
+            <div key={i} className="feature-card">
+              <div className="feat-icon">{feature.icon}</div>
+              <h3>{feature.title}</h3>
+              <p>{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <footer id="demo" className="footer-cta">
+        <h2>Ready to transform your institution?</h2>
+        <p>Schedule a personalized demo with our education systems experts.</p>
+        <button 
+          className="btn-primary"
+          onClick={() => alert('Demo scheduling modal would open here')}
         >
-          Count is {count}
+          Schedule a Demo
         </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
