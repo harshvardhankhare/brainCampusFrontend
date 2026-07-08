@@ -1,0 +1,27 @@
+.dashboard-layout{
+
+    display:flex;
+
+    min-height:100vh;
+
+    background:#f8fafc;
+}
+
+.dashboard-main{
+
+    flex:1;
+
+    margin-left:270px;
+
+    transition:.3s;
+}
+
+.dashboard-layout.collapsed .dashboard-main{
+
+    margin-left:0;
+}
+
+.dashboard-content{
+
+    padding:30px;
+}
