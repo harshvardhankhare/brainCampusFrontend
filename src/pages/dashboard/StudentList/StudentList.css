@@ -114,3 +114,10 @@
   color: #9ca3af;
   padding: 2rem !important;
 }
+.view-btn {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+.view-btn:hover {
+  background: #bae6fd;
+}
