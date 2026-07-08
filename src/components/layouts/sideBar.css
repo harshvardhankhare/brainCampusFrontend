@@ -1,0 +1,189 @@
+:root{
+    --sidebar-width:270px;
+
+    --primary:#4f46e5;
+    --primary-light:#eef2ff;
+
+    --text:#111827;
+    --text-light:#6b7280;
+
+    --border:#e5e7eb;
+
+    --bg:#ffffff;
+    --hover:#f8fafc;
+
+    --transition:.3s ease;
+}
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:var(--sidebar-width);
+    height:100vh;
+
+    background:#fff;
+
+    border-right:1px solid var(--border);
+
+    display:flex;
+    flex-direction:column;
+
+    transition:transform var(--transition);
+
+    z-index:1000;
+
+    box-shadow:0 8px 30px rgba(0,0,0,.06);
+}
+
+.sidebar.collapsed{
+    transform:translateX(-100%);
+}
+
+/* ---------- Header ---------- */
+
+.sidebar-header{
+
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 20px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    font-size:20px;
+    font-weight:700;
+
+    color:var(--primary);
+}
+
+.toggle-btn{
+
+    width:36px;
+    height:36px;
+
+    border:none;
+
+    background:#f3f4f6;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    display:grid;
+    place-items:center;
+
+    transition:.2s;
+}
+
+.toggle-btn:hover{
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+}
+
+/* ---------- Menu ---------- */
+
+.menu{
+
+    flex:1;
+
+    padding:20px 14px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:6px;
+
+    overflow-y:auto;
+}
+
+.menu-item{
+
+    display:flex;
+    align-items:center;
+
+    gap:14px;
+
+    padding:13px 16px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    color:var(--text-light);
+
+    transition:.25s;
+}
+
+.menu-item svg{
+
+    flex-shrink:0;
+}
+
+.menu-item:hover{
+
+    background:var(--hover);
+
+    color:var(--text);
+}
+
+.menu-item.active{
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+    font-weight:600;
+}
+
+/* ---------- Footer ---------- */
+
+.sidebar-footer{
+
+    padding:18px;
+
+    border-top:1px solid var(--border);
+}
+
+.user-card{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+}
+
+.user-avatar img{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+}
+
+.user-name{
+
+    font-size:14px;
+    font-weight:600;
+}
+
+.user-role{
+
+    font-size:12px;
+
+    color:#888;
+}

@@ -1,0 +1,177 @@
+:root{
+    --sidebar-width:270px;
+}
+
+.navbar{
+
+    position:sticky;
+
+    top:0;
+
+    height:72px;
+
+    background:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 28px;
+
+    border-bottom:1px solid #e5e7eb;
+
+    z-index:900;
+}
+
+.navbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+}
+
+.page-title{
+
+    font-size:22px;
+
+    font-weight:700;
+}
+
+.hamburger-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#f3f4f6;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.hamburger-btn:hover{
+
+    background:#eef2ff;
+
+    color:#4f46e5;
+}
+
+/* Search */
+
+.search-wrapper{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 14px;
+
+    width:320px;
+
+    height:42px;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:10px;
+}
+
+.search-input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    background:none;
+}
+
+/* Right */
+
+.navbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.navbar-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.icon-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    display:grid;
+
+    place-items:center;
+
+    transition:.2s;
+}
+
+.icon-btn:hover{
+
+    background:#f3f4f6;
+}
+
+.user-profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding-left:16px;
+
+    border-left:1px solid #e5e7eb;
+}
+
+.user-avatar-nav{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+}
+
+.user-name-nav{
+
+    font-weight:600;
+}
