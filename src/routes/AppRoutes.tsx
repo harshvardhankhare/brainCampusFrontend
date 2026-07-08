@@ -8,6 +8,8 @@ import Finance from "../pages/dashboard/finance/Finance";
 import DashboardLayout from '../components/layouts/DashboardLayout'
 import NotFound from '../pages/NotFound';
 import StudentList from '../pages/dashboard/StudentList/StudentList';
+import Academics from '../pages/dashboard/Academics/Academics';
+import StudentDetails from '../pages/dashboard/StudentDetail/StudentDetails';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -24,7 +26,9 @@ const AppRoutes = () => {
         <Route path="students" element={<Students />} />
         <Route path="teachers" element={<Teachers />} />
         <Route path="finance" element={<Finance />} />
+        <Route path='academics' element={<Academics/>}/>
         <Route path='students/list' element={<StudentList/>}/>
+        <Route path='students/:id' element={<StudentDetails/>}/>
       </Route>
       <Route path="/" element={<Navigate to="/login" replace />} />
 

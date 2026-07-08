@@ -1,6 +1,6 @@
 // StudentList.jsx
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaEdit, FaTrash } from "react-icons/fa";
+import { FaArrowLeft, FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import "./StudentList.css";
 
 // Mock student data generator based on filters
@@ -42,6 +42,7 @@ const StudentList = () => {
       alert(`Student ${id} deleted (mock)`);
     }
   };
+  const handleView = (id) => navigate(`/dashboard/students/${id}`);
 
   return (
  
@@ -81,6 +82,9 @@ const StudentList = () => {
                   <td>{student.section}</td>
                   <td>{student.year}</td>
                   <td className="action-btns">
+                    <button className="action-btn view-btn" onClick={() => handleView(student.id)}>
+                  <FaEye />
+                </button>
                     <button
                       className="action-btn edit-btn"
                       onClick={() => handleEdit(student.id)}
