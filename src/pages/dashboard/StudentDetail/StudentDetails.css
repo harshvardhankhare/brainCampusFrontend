@@ -228,3 +228,168 @@
   padding: 0.3rem 0.5rem;
   color: #1f2937;
 }
+/* Add to StudentDetails.css */
+
+/* Fee card full width */
+.detail-card.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Add payment form */
+.add-payment-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 1rem;
+}
+
+.payment-input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #f9fafb;
+}
+
+.payment-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.payment-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Fee header styles (already exist, but ensure they're consistent) */
+.fee-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+/* Results table with enhanced columns */
+.results-table th:not(:first-child),
+.results-table td:not(:first-child) {
+  text-align: center;
+}
+
+.results-table tfoot th {
+  border-top: 2px solid #6366f1;
+  padding-top: 0.5rem;
+}
+
+.results-table tfoot td {
+  border-top: 2px solid #6366f1;
+  padding-top: 0.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+/* Additional styles for StudentDetails.css */
+
+/* Fee header with year selector */
+.fee-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.fee-header h3 {
+  margin: 0;
+}
+
+.fee-year-select {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+.fee-year-select:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.fee-class {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.fee-breakdown {
+  border-top: 1px solid #f3f4f6;
+  padding-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.fee-breakdown .fee-row {
+  padding: 0.2rem 0;
+}
+
+.fee-total {
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.3rem 0;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 0.3rem;
+}
+
+/* Results header with filters */
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.results-filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.result-filter-select {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+.result-filter-select:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.result-filter-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.no-data {
+  color: #9ca3af;
+  text-align: center;
+  padding: 1rem 0;
+}
