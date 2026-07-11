@@ -105,3 +105,159 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
 }
+/* Additional styles for Students.css */
+
+/* Header actions row */
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.action-btn.secondary {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.action-btn.secondary:hover {
+  background: #e0e7ff;
+  transform: translateY(-2px);
+}
+
+.action-btn.tertiary {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.action-btn.tertiary:hover {
+  background: #fde68a;
+  transform: translateY(-2px);
+}
+
+.action-btn.upload {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.action-btn.upload:hover {
+  background: #a7f3d0;
+  transform: translateY(-2px);
+}
+
+/* Modal for result with larger width */
+.modal-content.result-modal {
+  max-width: 700px;
+}
+
+/* Subject input table */
+.subject-table-wrapper {
+  margin-top: 0.5rem;
+}
+
+.subject-table-wrapper label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #374151;
+}
+
+.subject-table-scroll {
+  overflow-x: auto;
+  margin-bottom: 0.5rem;
+}
+
+.subject-input-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.subject-input-table th {
+  background: #f9fafb;
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.subject-input-table td {
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.subject-input-table input {
+  width: 100%;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  background: #f9fafb;
+}
+
+.subject-input-table input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
+}
+
+.remove-subject-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.remove-subject-btn:hover:not(:disabled) {
+  background: #fecaca;
+}
+
+.remove-subject-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.add-subject-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 1rem;
+  background: #eef2ff;
+  color: #4f46e5;
+  border: 1px dashed #6366f1;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-subject-btn:hover {
+  background: #e0e7ff;
+}
+
+/* Fee breakdown inputs inside modal */
+.fee-breakdown-inputs {
+  margin-top: 0.5rem;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 0.5rem;
+}
+
+/* Reuse existing modal styles from Teachers.css */
+/* Ensure .modal-overlay, .modal-content, .modal-header, .modal-close-btn, .form-actions, .cancel-btn, .submit-btn are defined */
+/* If not, copy them from Teachers.css or include them here */
