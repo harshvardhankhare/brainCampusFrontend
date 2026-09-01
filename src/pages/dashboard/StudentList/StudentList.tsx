@@ -1,118 +1,247 @@
-// StudentList.jsx
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaEdit, FaTrash, FaEye } from "react-icons/fa";
-import "./StudentList.css";
 
-// Mock student data generator based on filters
-const generateMockStudents = (classVal, section, year) => {
-  const names = [
-    "Emma Johnson", "Liam Smith", "Olivia Davis", "Noah Wilson",
-    "Ava Brown", "James Taylor", "Sophia Martinez", "Benjamin Anderson",
-    "Mia Thomas", "Ethan Jackson"
-  ];
-  return names.map((name, index) => ({
-    id: index + 1,
-    name,
-    rollNo: `2024${String(index + 1).padStart(3, "0")}`,
-    class: classVal,
-    section,
-    year,
-    email: `${name.toLowerCase().replace(" ", ".")}@school.edu`,
-  }));
-};
+import api from "../../../api/axios";
+import "./StudentList.css";
 
 const StudentList = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
   const params = new URLSearchParams(location.search);
-  const classVal = params.get("class") || "Unknown";
-  const section = params.get("section") || "Unknown";
-  const year = params.get("year") || "Unknown";
 
-  const students = generateMockStudents(classVal, section, year);
+  const classId = params.get("classId");
+  const year = params.get("year");
 
-  const handleBack = () => navigate("/dashboard/students");
+  const [students, setStudents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await api.get("/students", {
+          params: {
+            classId: classId,
+            academicYear: year,
+          },
+        });
+
+        setStudents(response.data.data || []);
+      } catch (err) {
+        console.error("Failed to fetch students:", err);
+
+        setError(
+          err.response?.data?.message ||
+            "Failed to load students"
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (classId && year) {
+      fetchStudents();
+    } else {
+      setLoading(false);
+      setError("Invalid class or academic year");
+    }
+  }, [classId, year]);
+
+  const handleBack = () => {
+    navigate("/dashboard/students");
+  };
 
   const handleEdit = (id) => {
-    alert(`Edit student with ID: ${id}`);
+    navigate(`/dashboard/students/${id}/edit`);
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this student?")) {
-      alert(`Student ${id} deleted (mock)`);
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this student?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      await api.delete(`/students/${id}`);
+
+      setStudents((prevStudents) =>
+        prevStudents.filter((student) => student.id !== id)
+      );
+    } catch (err) {
+      console.error("Failed to delete student:", err);
+
+      alert(
+        err.response?.data?.message ||
+          "Failed to delete student"
+      );
     }
   };
-  const handleView = (id) => navigate(`/dashboard/students/${id}`);
+
+  const handleView = (id) => {
+    navigate(`/dashboard/students/${id}`);
+  };
+
+  const className =
+    students.length > 0
+      ? students[0].className
+      : "";
+
+  const section =
+    students.length > 0
+      ? students[0].section
+      : "";
 
   return (
- 
     <div className="student-list-page">
+
       <div className="list-header">
-        <button className="back-btn" onClick={handleBack}>
+
+        <button
+          className="back-btn"
+          onClick={handleBack}
+        >
           <FaArrowLeft /> Back
         </button>
+
         <h2 className="list-title">
-          Students of {classVal} - {section} ({year})
+          Students of {className} - {section} ({year})
         </h2>
+
       </div>
 
-      <div className="table-wrapper">
-        <table className="student-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Roll No</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Class</th>
-              <th>Section</th>
-              <th>Year</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.length > 0 ? (
-              students.map((student, index) => (
-                <tr key={student.id}>
-                  <td>{index + 1}</td>
-                  <td>{student.rollNo}</td>
-                  <td>{student.name}</td>
-                  <td>{student.email}</td>
-                  <td>{student.class}</td>
-                  <td>{student.section}</td>
-                  <td>{student.year}</td>
-                  <td className="action-btns">
-                    <button className="action-btn view-btn" onClick={() => handleView(student.id)}>
-                  <FaEye />
-                </button>
-                    <button
-                      className="action-btn edit-btn"
-                      onClick={() => handleEdit(student.id)}
-                    >
-                      <FaEdit />
-                    </button>
-                    <button
-                      className="action-btn delete-btn"
-                      onClick={() => handleDelete(student.id)}
-                    >
-                      <FaTrash />
-                    </button>
+      {loading && (
+        <div className="loading">
+          Loading students...
+        </div>
+      )}
+
+      {error && (
+        <div className="error">
+          {error}
+        </div>
+      )}
+
+      {!loading && !error && (
+        <div className="table-wrapper">
+
+          <table className="student-table">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Class</th>
+                <th>Section</th>
+                <th>Year</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              {students.length > 0 ? (
+
+                students.map((student, index) => (
+
+                  <tr key={student.id}>
+
+                    <td>{index + 1}</td>
+
+                    <td>
+                      {student.roleNumber}
+                    </td>
+
+                    <td>
+                      {student.firstName}{" "}
+                      {student.lastName || ""}
+                    </td>
+
+                    <td>
+                      {student.email}
+                    </td>
+
+                    <td>
+                      {student.className}
+                    </td>
+
+                    <td>
+                      {student.section}
+                    </td>
+
+                    <td>
+                      {student.academicYear}
+                    </td>
+
+                    <td className="action-btns">
+
+                      <button
+                        className="action-btn view-btn"
+                        onClick={() =>
+                          handleView(student.id)
+                        }
+                        title="View"
+                      >
+                        <FaEye />
+                      </button>
+
+                      <button
+                        className="action-btn edit-btn"
+                        onClick={() =>
+                          handleEdit(student.id)
+                        }
+                        title="Edit"
+                      >
+                        <FaEdit />
+                      </button>
+
+                      <button
+                        className="action-btn delete-btn"
+                        onClick={() =>
+                          handleDelete(student.id)
+                        }
+                        title="Delete"
+                      >
+                        <FaTrash />
+                      </button>
+
+                    </td>
+
+                  </tr>
+
+                ))
+
+              ) : (
+
+                <tr>
+                  <td
+                    colSpan="8"
+                    className="no-data"
+                  >
+                    No students found.
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="8" className="no-data">
-                  No students found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+
+              )}
+
+            </tbody>
+
+          </table>
+
+        </div>
+      )}
+
     </div>
   );
-  
 };
 
 export default StudentList;
