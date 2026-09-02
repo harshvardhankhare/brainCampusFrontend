@@ -56,17 +56,10 @@ const StudentDetails = () => {
     }
   }, [id]);
 
-  // =========================
-  // Back
-  // =========================
 
   const handleBack = () => {
     navigate("/dashboard/students");
   };
-
-  // =========================
-  // Loading
-  // =========================
 
   if (loading) {
     return (
@@ -77,10 +70,6 @@ const StudentDetails = () => {
       </div>
     );
   }
-
-  // =========================
-  // Error
-  // =========================
 
   if (error || !student) {
     return (
@@ -100,10 +89,6 @@ const StudentDetails = () => {
       </div>
     );
   }
-
-  // =========================
-  // UI
-  // =========================
 
   return (
     <div className="student-details-page">
