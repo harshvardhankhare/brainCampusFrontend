@@ -1,0 +1,111 @@
+/* src/pages/dashboard/staff/StaffList.module.css */
+.container {
+  padding: 2rem;
+  background: #f9fafc;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.createBtn {
+  background: #1a3a5c;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.filters {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filterSelect {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.table th {
+  background: #f1f4f8;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+}
+
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eaeef3;
+}
+
+.activeBadge {
+  background: #d4edda;
+  color: #155724;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.inactiveBadge {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.editBtn,
+.toggleBtn,
+.deleteBtn {
+  margin-right: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.editBtn {
+  background: #ffc107;
+  color: #212529;
+}
+
+.toggleBtn {
+  background: #17a2b8;
+  color: white;
+}
+
+.deleteBtn {
+  background: #dc3545;
+  color: white;
+}
+
+.noData {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+}
+
+.loading,
+.error {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+}

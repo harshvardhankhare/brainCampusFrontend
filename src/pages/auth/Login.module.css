@@ -1,0 +1,391 @@
+/* Login.module.css */
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  background: #f0f4f8;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ===== Left Panel (Brand) ===== */
+.brandPanel {
+  flex: 1;
+  background: linear-gradient(145deg, #1a3a5c 0%, #0d2b44 100%);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.brandPanel::after {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.brandContent {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  margin-top: 10vh;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.logoIcon {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.logoText {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.brandTitle {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.brandTitle span {
+  color: #7ab7e8;
+}
+
+.brandSubtitle {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.brandFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.featureIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: rgba(122, 183, 232, 0.2);
+  border-radius: 50%;
+  font-weight: 700;
+  color: #7ab7e8;
+  flex-shrink: 0;
+}
+
+.brandFooter {
+  position: relative;
+  z-index: 1;
+  font-size: 0.85rem;
+  opacity: 0.5;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Right Panel (Form) ===== */
+.formPanel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding: 2rem;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 440px;
+  padding: 0.5rem 0;
+}
+
+.formHeader {
+  margin-bottom: 2.5rem;
+}
+
+.formHeader h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a2b3e;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.5px;
+}
+
+.formHeader p {
+  color: #6b7a8f;
+  font-size: 1rem;
+}
+
+/* ===== Form Elements ===== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.inputGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a2b3e;
+  letter-spacing: 0.3px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  background: #f7f9fc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  padding: 0 0.75rem;
+}
+
+.inputWrapper:focus-within {
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.inputIcon {
+  font-size: 1.2rem;
+  opacity: 0.5;
+  margin-right: 0.5rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.inputWrapper input {
+  width: 100%;
+  padding: 0.85rem 0;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #1a2b3e;
+  outline: none;
+  font-family: inherit;
+}
+
+.inputWrapper input::placeholder {
+  color: #a0b3c9;
+  font-weight: 400;
+}
+
+/* ===== Form Options ===== */
+.formOptions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-top: -0.3rem;
+}
+
+.rememberMe {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4a5a72;
+  cursor: pointer;
+}
+
+.rememberMe input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
+
+.forgotPassword {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.forgotPassword:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* ===== Error Message ===== */
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+}
+
+.errorIcon {
+  font-size: 1.1rem;
+}
+
+/* ===== Submit Button ===== */
+.submitButton {
+  background: #1a3a5c;
+  color: #ffffff;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #0d2b44;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 58, 92, 0.3);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ===== Loading Spinner ===== */
+.loadingSpinner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== Form Footer ===== */
+.formFooter {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #6b7a8f;
+}
+
+.formFooter a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.formFooter a:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .brandPanel {
+    padding: 2rem 1.5rem;
+    min-height: 40vh;
+  }
+
+  .brandContent {
+    max-width: 100%;
+    margin-top: 0;
+  }
+
+  .brandTitle {
+    font-size: 2.2rem;
+  }
+
+  .brandFeatures {
+    display: none; /* hide on smaller screens for brevity */
+  }
+
+  .formPanel {
+    padding: 2rem 1.5rem;
+  }
+
+  .formContainer {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .brandTitle {
+    font-size: 1.8rem;
+  }
+
+  .logoText {
+    font-size: 1.4rem;
+  }
+
+  .formHeader h2 {
+    font-size: 1.6rem;
+  }
+
+  .inputWrapper input {
+    padding: 0.7rem 0;
+    font-size: 0.95rem;
+  }
+
+  .submitButton {
+    padding: 0.8rem;
+  }
+}

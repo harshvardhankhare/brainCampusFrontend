@@ -11,6 +11,9 @@ import StudentList from '../pages/dashboard/StudentList/StudentList';
 import Academics from '../pages/dashboard/Academics/Academics';
 import StudentDetails from '../pages/dashboard/StudentDetail/StudentDetails';
 import TeacherAssignments from '../pages/dashboard/teachers/TeachersAssignment';
+import StudentResultDetails from '../pages/dashboard/StudentDetail/StudentResultDetails';
+import StaffList from '../pages/dashboard/staff/staffList'
+import AdminOptions from '../pages/Admin/AdminOptions';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -40,6 +43,9 @@ const AppRoutes = () => {
         <Route path='students/list' element={<StudentList/>}/>
         <Route path='students/:id' element={<StudentDetails/>}/>
         <Route path="teachers/assignments" element={<TeacherAssignments />}/>
+        <Route path="students/:id/results/:examId" element={<StudentResultDetails />}/>
+        <Route path="staff" element={<StaffList />} />
+        <Route path="admin" element={<AdminOptions />} />
       </Route>
       <Route path="/" element={<Navigate to="/login" replace />} />
 

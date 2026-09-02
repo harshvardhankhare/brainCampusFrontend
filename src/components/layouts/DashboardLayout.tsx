@@ -1,14 +1,20 @@
 // DashboardLayout.jsx
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { useState,useEffect } from "react";
+import { Outlet ,useLocation } from "react-router-dom";
 import "./dashboard.css";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
 const DashboardLayout = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const location = useLocation();
+    useEffect(() => {
+      setIsCollapsed(true);
+  }, [location]);
 
-  const toggleSidebar = () => setIsCollapsed((prev) => !prev);
+   const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
   return (
     <div className={`dashboard-layout ${isCollapsed ? "collapsed" : ""}`}>
