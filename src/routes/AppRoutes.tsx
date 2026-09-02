@@ -10,6 +10,7 @@ import NotFound from '../pages/NotFound';
 import StudentList from '../pages/dashboard/StudentList/StudentList';
 import Academics from '../pages/dashboard/Academics/Academics';
 import StudentDetails from '../pages/dashboard/StudentDetail/StudentDetails';
+import TeacherAssignments from '../pages/dashboard/teachers/TeachersAssignment';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -38,6 +39,7 @@ const AppRoutes = () => {
         <Route path='academics' element={<Academics/>}/>
         <Route path='students/list' element={<StudentList/>}/>
         <Route path='students/:id' element={<StudentDetails/>}/>
+        <Route path="teachers/assignments" element={<TeacherAssignments />}/>
       </Route>
       <Route path="/" element={<Navigate to="/login" replace />} />
 
