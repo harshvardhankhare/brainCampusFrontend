@@ -5,13 +5,14 @@ interface Props {
 }
 
 const ProtectedRoute = ({ children }: Props) => {
-  // test
- const token = localStorage.getItem("token");
-  // if (!token) {
-  //   return <Navigate to="/login" replace />;
-  // }
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
 
   return <>{children}</>;
-}
+};
 
-export default ProtectedRoute
+export default ProtectedRoute;
