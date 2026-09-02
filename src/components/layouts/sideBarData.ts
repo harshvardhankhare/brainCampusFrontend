@@ -4,6 +4,7 @@ import {
   Users,
   Wallet,
   BookOpen,
+   Settings
 } from "lucide-react";
 
 export const sidebarItems = [
@@ -31,5 +32,10 @@ export const sidebarItems = [
     title: "Finance",
     path: "/dashboard/finance",
     icon: Wallet,
+  },
+   {
+    title: "Admin",
+    path: "/dashboard/admin",
+    icon: Settings,
   },
 ];

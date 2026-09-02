@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { FaSearch, FaBell, FaCog } from "react-icons/fa";
 import "./Navbar.css";
+import { useSelector } from "react-redux";
 
 const Navbar = ({ onToggle, isCollapsed }) => {
   const [searchQuery, setSearchQuery] = useState("");
-
+ const { user } = useSelector((state) => state.auth);
   return (
     <header className="navbar">
       <div className="navbar-left">
@@ -44,11 +45,11 @@ const Navbar = ({ onToggle, isCollapsed }) => {
           </button>
           <div className="user-profile">
             <img
-              src="https://ui-avatars.com/api/?name=John+Doe&background=6366f1&color=fff&size=40"
+              src={`https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=6366f1&color=fff&size=40`}
               alt="User"
               className="user-avatar-nav"
             />
-            <span className="user-name-nav">John Doe</span>
+            <span className="user-name-nav">{user?.firstName+" "+user?.lastName}</span>
           </div>
         </div>
       </div>

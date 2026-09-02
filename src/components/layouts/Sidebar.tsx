@@ -2,8 +2,9 @@
 import { NavLink } from "react-router-dom";
 import { sidebarItems } from "./sideBarData";
 import "./sideBar.css";
-
+import { useSelector } from "react-redux";
 const Sidebar = ({ isCollapsed, onToggle }) => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <aside className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
       {/* Header with logo and toggle */}
@@ -52,8 +53,8 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
           </div>
           {!isCollapsed && (
             <div className="user-info">
-              <span className="user-name">John Doe</span>
-              <span className="user-role">Admin</span>
+              <span className="user-name">{user?.firstName || "User"}</span>
+              <span className="user-role">{user?.role || "User"}</span>
             </div>
           )}
         </div>

@@ -18,9 +18,9 @@ const StudentDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // =========================
-  // Fetch student
-  // =========================
+  const [exams, setExams] = useState([]);
+  const [examsLoading, setExamsLoading] = useState(false);
+  const [examsError, setExamsError] = useState("");
 
   useEffect(() => {
     const fetchStudent = async () => {
@@ -55,6 +55,51 @@ const StudentDetails = () => {
       fetchStudent();
     }
   }, [id]);
+
+  useEffect(() => {
+  const fetchExams = async () => {
+    if (!student?.classId) {
+      return;
+    }
+
+    try {
+      setExamsLoading(true);
+      setExamsError("");
+
+      const response = await api.get(
+        `/exams/class/${student.classId}`
+      );
+
+      const examData = response.data.data || [];
+
+      // Only show exams for the student's academic year
+      const filteredExams = examData.filter(
+        (exam) =>
+          exam.academicYear === student.academicYear &&
+          exam.active
+      );
+
+      setExams(filteredExams);
+    } catch (err) {
+      console.error("Failed to fetch exams:", err);
+
+      if (err.response?.status === 403) {
+        setExamsError(
+          "You do not have permission to view exams."
+        );
+      } else {
+        setExamsError(
+          err.response?.data?.message ||
+            "Failed to load exams."
+        );
+      }
+    } finally {
+      setExamsLoading(false);
+    }
+  };
+
+  fetchExams();
+}, [student]);
 
 
   const handleBack = () => {
@@ -92,13 +137,7 @@ const StudentDetails = () => {
 
   return (
     <div className="student-details-page">
-
-      {/* =========================
-          Header
-          ========================= */}
-
       <div className="details-header">
-
         <button
           className="back-btn"
           onClick={handleBack}
@@ -111,11 +150,6 @@ const StudentDetails = () => {
         </h1>
 
       </div>
-
-
-      {/* =========================
-          Profile Card
-          ========================= */}
 
       <div className="profile-card">
 
@@ -159,11 +193,6 @@ const StudentDetails = () => {
         </div>
 
       </div>
-
-
-      {/* =========================
-          Details Grid
-          ========================= */}
 
       <div className="details-grid">
 
@@ -319,9 +348,52 @@ const StudentDetails = () => {
 
           </div>
 
-          <p className="no-data">
-            Results will be connected to the backend next.
-          </p>
+        <div className="results-list">
+
+  {examsLoading && (
+    <p className="no-data">
+      Loading exams...
+    </p>
+  )}
+
+  {examsError && (
+    <p className="no-data">
+      {examsError}
+    </p>
+  )}
+
+  {!examsLoading && !examsError && exams.length === 0 && (
+    <p className="no-data">
+      No exams found for this academic year.
+    </p>
+  )}
+
+  {!examsLoading &&
+    !examsError &&
+    exams.map((exam) => (
+      <div
+        key={exam.id}
+        className="result-exam-item"
+        onClick={() =>
+          navigate(
+            `/dashboard/students/${student.id}/results/${exam.id}`
+          )
+        }
+      >
+        <div className="result-exam-info">
+          <h4>{exam.name}</h4>
+
+          <span>
+            {exam.startDate || "Date not available"}
+          </span>
+        </div>
+
+        <span className="result-exam-arrow">
+          →
+        </span>
+      </div>
+    ))}
+</div>
 
         </div>
 

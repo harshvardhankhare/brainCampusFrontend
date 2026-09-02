@@ -393,3 +393,145 @@
   text-align: center;
   padding: 1rem 0;
 }
+/* =========================
+   Results List
+   ========================= */
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+
+/* =========================
+   Exam Item
+   ========================= */
+
+.result-exam-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 18px;
+
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.result-exam-item:hover {
+  background: #ffffff;
+  border-color: #6366f1;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================
+   Exam Information
+   ========================= */
+
+.result-exam-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.result-exam-info h4 {
+  margin: 0;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #1f2937;
+}
+
+.result-exam-info span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+
+/* =========================
+   Arrow
+   ========================= */
+
+.result-exam-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+
+  background: #eef2ff;
+  color: #6366f1;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.result-exam-item:hover .result-exam-arrow {
+  background: #6366f1;
+  color: white;
+  transform: translateX(3px);
+}
+
+
+/* =========================
+   No Data
+   ========================= */
+
+.results-list .no-data {
+  margin: 0;
+  padding: 24px;
+
+  text-align: center;
+
+  color: #6b7280;
+  font-size: 14px;
+
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 600px) {
+  .result-exam-item {
+    padding: 14px;
+  }
+
+  .result-exam-info h4 {
+    font-size: 14px;
+  }
+
+  .result-exam-info span {
+    font-size: 12px;
+  }
+
+  .result-exam-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+}
