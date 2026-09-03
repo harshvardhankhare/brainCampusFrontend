@@ -261,3 +261,14 @@
 /* Reuse existing modal styles from Teachers.css */
 /* Ensure .modal-overlay, .modal-content, .modal-header, .modal-close-btn, .form-actions, .cancel-btn, .submit-btn are defined */
 /* If not, copy them from Teachers.css or include them here */
+.error-msg {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+.modal-content {
+  max-width: 700px;
+}
