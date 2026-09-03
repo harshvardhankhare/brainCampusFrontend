@@ -1,0 +1,395 @@
+/* ===== BASE ===== */
+.roles-page {
+  padding: 1.5rem 2rem;
+  background-color: #f8fafc;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+.roles-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.roles-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.roles-title svg {
+  color: #4f46e5;
+}
+
+.roles-subtitle {
+  color: #64748b;
+  margin: 0.35rem 0 0 0;
+  font-size: 0.95rem;
+}
+
+.give-permissions-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.give-permissions-btn:hover:not(:disabled) {
+  background: #4338ca;
+  transform: translateY(-1px);
+}
+
+.give-permissions-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== STATUS BANNER ===== */
+.status-banner {
+  padding: 0.85rem 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+}
+
+.status-banner.success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.status-banner.error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.status-banner.info {
+  background-color: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+
+/* ===== LAYOUT ===== */
+.roles-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.5rem;
+  flex: 1;                 /* fills the remaining height */
+  min-height: 0;           /* prevents overflow */
+}
+
+/* ===== LEFT SIDEBAR ===== */
+.roles-sidebar {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  height: 100%;            /* match the right column */
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.count-badge {
+  background: #e0e7ff;
+  color: #4338ca;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+}
+
+.role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.role-card {
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.role-card:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.role-card.active {
+  background: #eef2ff;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px #6366f1;
+}
+
+.role-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.role-name {
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+.admin-badge {
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.role-perms-count {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* ===== RIGHT PANEL ===== */
+.permissions-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 400px;       /* fallback */
+}
+
+/* ===== TOOLBAR ===== */
+.permissions-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  flex-wrap: wrap;
+  flex-shrink: 0;          /* keep toolbar at top */
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 420px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.9rem;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.65rem 2rem 0.65rem 2.4rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  background: #f8fafc;
+  outline: none;
+  transition: border 0.2s ease, background 0.2s ease;
+}
+
+.search-box input:focus {
+  background: #ffffff;
+  border-color: #6366f1;
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 0.6rem;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.tool-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.tool-btn:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+
+.tool-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selected-count {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-left: 0.5rem;
+}
+
+/* ===== SCROLL AREA (fills remaining height) ===== */
+.permissions-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.3rem;
+  min-height: 200px;
+}
+
+/* ===== PERMISSION LIST – SINGLE COLUMN ===== */
+.permissions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* ===== PERMISSION CHECKBOX ITEM ===== */
+.perm-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.perm-checkbox-item:hover:not(.disabled) {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.perm-checkbox-item.checked {
+  background: #eef2ff;
+  border-color: #818cf8;
+}
+
+.perm-checkbox-item.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.check-icon {
+  color: #cbd5e1;
+  font-size: 1.15rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.perm-checkbox-item.checked .check-icon {
+  color: #4f46e5;
+}
+
+.perm-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.perm-code {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+  word-break: break-word;
+}
+
+.perm-desc {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.15rem;
+}
+
+/* ===== UTILITY ===== */
+.loading-text,
+.no-perms-found {
+  padding: 1.5rem;
+  color: #64748b;
+  text-align: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .roles-layout {
+    grid-template-columns: 1fr;
+    flex: none;
+  }
+
+  .roles-sidebar {
+    height: auto;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .permissions-container {
+    height: auto;
+    min-height: 400px;
+  }
+
+  .permissions-scroll-area {
+    max-height: 60vh;
+  }
+}
