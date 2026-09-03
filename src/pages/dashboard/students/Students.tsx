@@ -438,27 +438,27 @@ const Students: React.FC = () => {
       {/* Header */}
       <div className="students-header">
         <h1 className="students-title">Students</h1>
-        <div className="header-actions">
-          <button className="add-student-btn" onClick={handleAddStudent}>
+        <div className="student-header-actions">
+          <button className="student-add-btn" onClick={handleAddStudent}>
             <FaUserPlus /> Add Student
           </button>
           <button
-            className="action-btn secondary"
+            className="student-action-btn student-action-btn--fee"
             onClick={() => setShowAddFeeModal(true)}
           >
-            <FaMoneyBill /> Add Fee
+             Add Fee
           </button>
           <button
-            className="action-btn tertiary"
+            className="student-action-btn student-action-btn--class"
             onClick={() => setShowClassFeeModal(true)}
           >
-            <FaUsers /> Class Fee
+             Class Fee
           </button>
           <button
-            className="action-btn upload"
+            className="student-action-btn student-action-btn--upload"
             onClick={() => setShowResultModal(true)}
           >
-            <FaUpload /> Upload Result
+             Upload Result
           </button>
         </div>
       </div>

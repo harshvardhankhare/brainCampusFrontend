@@ -108,53 +108,129 @@
 /* Additional styles for Students.css */
 
 /* Header actions row */
-.header-actions {
+/* ===== HEADER ===== */
+.students-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.students-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+/* ===== HEADER ACTIONS CONTAINER ===== */
+.student-header-actions {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+  align-items: center;
 }
 
-.action-btn {
-  display: flex;
+/* ===== ADD STUDENT BUTTON ===== */
+.student-add-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1.2rem;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+.student-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+}
+
+.student-add-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===== ACTION BUTTONS (Fee, Class Fee, Upload) ===== */
+.student-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.action-btn.secondary {
+.student-action-btn svg {
+  font-size: 1rem;
+}
+
+/* Individual variants */
+.student-action-btn--fee {
   background: #eef2ff;
   color: #4f46e5;
 }
-
-.action-btn.secondary:hover {
+.student-action-btn--fee:hover {
   background: #e0e7ff;
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.15);
 }
 
-.action-btn.tertiary {
+.student-action-btn--class {
   background: #fef3c7;
   color: #d97706;
 }
-
-.action-btn.tertiary:hover {
+.student-action-btn--class:hover {
   background: #fde68a;
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(217, 119, 6, 0.15);
 }
 
-.action-btn.upload {
+.student-action-btn--upload {
   background: #d1fae5;
   color: #065f46;
 }
-
-.action-btn.upload:hover {
+.student-action-btn--upload:hover {
   background: #a7f3d0;
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(6, 95, 70, 0.15);
+}
+
+/* Active state for all */
+.student-action-btn:active,
+.student-add-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .student-header-actions {
+    gap: 0.5rem;
+  }
+  .student-action-btn,
+  .student-add-btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
+  }
+  .student-action-btn svg,
+  .student-add-btn svg {
+    font-size: 0.85rem;
+  }
 }
 
 /* Modal for result with larger width */
