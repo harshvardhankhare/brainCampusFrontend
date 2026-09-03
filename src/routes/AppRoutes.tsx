@@ -14,6 +14,7 @@ import TeacherAssignments from '../pages/dashboard/teachers/TeachersAssignment';
 import StudentResultDetails from '../pages/dashboard/StudentDetail/StudentResultDetails';
 import StaffList from '../pages/dashboard/staff/staffList'
 import AdminOptions from '../pages/Admin/AdminOptions';
+import Roles from "../pages/Admin/Roles"
 const AppRoutes = () => {
   return (
     <Routes>
@@ -46,6 +47,7 @@ const AppRoutes = () => {
         <Route path="students/:id/results/:examId" element={<StudentResultDetails />}/>
         <Route path="staff" element={<StaffList />} />
         <Route path="admin" element={<AdminOptions />} />
+        <Route path="roles" element = {<Roles/>}/>
       </Route>
       <Route path="/" element={<Navigate to="/login" replace />} />
 

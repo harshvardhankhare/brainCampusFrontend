@@ -25,7 +25,7 @@ const Navbar = ({ onToggle, isCollapsed }) => {
 
       <div className="navbar-right">
         <div className="search-wrapper">
-          <FaSearch className="search-icon" />
+          <FaSearch className="navbar-search-icon" />
           <input
             type="text"
             placeholder="Search..."
