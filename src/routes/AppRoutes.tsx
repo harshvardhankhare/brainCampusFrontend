@@ -15,6 +15,7 @@ import StudentResultDetails from '../pages/dashboard/StudentDetail/StudentResult
 import StaffList from '../pages/dashboard/staff/staffList'
 import AdminOptions from '../pages/Admin/AdminOptions';
 import Roles from "../pages/Admin/Roles"
+import TeacherDetails from "../pages/dashboard/teachers/TeacherDetails"
 const AppRoutes = () => {
   return (
     <Routes>
@@ -44,6 +45,7 @@ const AppRoutes = () => {
         <Route path='students/list' element={<StudentList/>}/>
         <Route path='students/:id' element={<StudentDetails/>}/>
         <Route path="teachers/assignments" element={<TeacherAssignments />}/>
+        <Route path="teachers/:id" element={<TeacherDetails/>}/>
         <Route path="students/:id/results/:examId" element={<StudentResultDetails />}/>
         <Route path="staff" element={<StaffList />} />
         <Route path="admin" element={<AdminOptions />} />
