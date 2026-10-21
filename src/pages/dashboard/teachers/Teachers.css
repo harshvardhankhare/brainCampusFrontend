@@ -8,6 +8,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .teachers-title {
@@ -15,6 +17,47 @@
   font-weight: 700;
   color: #111827;
   margin: 0;
+}
+
+.teachers-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.teachers-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* search */
+.teachers-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  color: #9ca3af;
+  transition: all 0.2s ease;
+}
+
+.teachers-search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #1f2937;
+  width: 230px;
+}
+
+.teachers-search:focus-within {
+  border-color: #6366f1;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
 .add-teacher-btn {
@@ -37,6 +80,7 @@
   box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
 }
 
+/* table */
 .table-wrapper {
   background: #ffffff;
   border-radius: 12px;
@@ -59,7 +103,7 @@
 }
 
 .teacher-table th {
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
   text-align: left;
   font-weight: 600;
   color: #374151;
@@ -67,48 +111,55 @@
 }
 
 .teacher-table td {
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
   border-bottom: 1px solid #f3f4f6;
   color: #1f2937;
+  vertical-align: middle;
+}
+
+.teacher-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .teacher-table tbody tr:hover {
   background: #f9fafb;
 }
 
-.action-btns {
-  display: flex;
-  gap: 0.5rem;
+/* employee code chip */
+.employee-code {
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
 }
 
-.action-btn {
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: 6px;
-  display: flex;
+/* view details button */
+.view-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid #c7d2fe;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
-.edit-btn {
-  background: #e0f2fe;
-  color: #0284c7;
-}
-
-.edit-btn:hover {
-  background: #bae6fd;
-}
-
-.delete-btn {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-.delete-btn:hover {
-  background: #fecaca;
+.view-btn:hover {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
 }
 
 .no-data {
@@ -117,7 +168,27 @@
   padding: 2rem !important;
 }
 
-/* Modal Styles */
+/* states */
+.loading {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* =========================
+   Modal
+   ========================= */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -213,13 +284,8 @@
 .form-group select:focus {
   outline: none;
   border-color: #6366f1;
+  background: #fff;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
 }
 
 .form-actions {
@@ -255,7 +321,37 @@
   transition: all 0.3s;
 }
 
-.submit-btn:hover {
+.submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+}
+
+.submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* responsive */
+@media (max-width: 640px) {
+  .teachers-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .teachers-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .teachers-search input {
+    width: 100%;
+  }
+
+  .teachers-search {
+    width: 100%;
+  }
+
+  .add-teacher-btn {
+    justify-content: center;
+  }
 }
