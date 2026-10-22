@@ -17,6 +17,8 @@ import AdminOptions from '../pages/Admin/AdminOptions';
 import Roles from "../pages/Admin/Roles"
 import TeacherDetails from "../pages/dashboard/teachers/TeacherDetails"
 import StudentFees from '../pages/dashboard/StudentDetail/StudentFees';
+import ApiDashboard from '../pages/dashboard/ApiDashboard/ApiDashboard';
+import AuditLogViewer from '../pages/dashboard/ApiDashboard/AuditLogViewer';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -52,9 +54,10 @@ const AppRoutes = () => {
         <Route path="staff" element={<StaffList />} />
         <Route path="admin" element={<AdminOptions />} />
         <Route path="roles" element = {<Roles/>}/>
+        <Route path="api-dashboard" element={<ApiDashboard/>}/>
+        <Route path="api-dashboard/logs" element={<AuditLogViewer/>}/>
       </Route>
       <Route path="/" element={<Navigate to="/login" replace />} />
-
       <Route path="*" element={<NotFound/>} />
     </Routes>
   )

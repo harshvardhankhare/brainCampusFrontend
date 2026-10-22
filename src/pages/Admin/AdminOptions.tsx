@@ -1,7 +1,5 @@
-// src/pages/dashboard/AdminOptions.jsx
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users, Shield, BookOpen, Settings, BarChart } from 'lucide-react';
+import { Users, Shield, Settings, BarChart,Terminal  } from 'lucide-react';
 import styles from './AdminOptions.module.css';
 
 const AdminOptions = () => {
@@ -40,6 +38,14 @@ const AdminOptions = () => {
       color: '#f59e0b',
       path: '/dashboard/reports', // not implemented yet
     },
+  {
+  id: 'api-dashboard',
+  title: 'Admin API Dashboard',
+  description: 'View audit logs, user activity, and API logs.',
+  icon: Terminal,
+  color: '#10b981',
+  path: '/dashboard/api-dashboard',
+},
   ];
 
   return (
