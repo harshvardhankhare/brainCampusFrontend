@@ -88,7 +88,7 @@ const Students: React.FC = () => {
     class: "",
     section: "",
     year: "",
-    feeMonth: "", // 1 = Jan ... 12 = Dec, or empty for annual/non-monthly
+    feeMonth: "",
     tuitionFee: "",
     examFee: "",
     busFee: "",
@@ -102,34 +102,10 @@ const Students: React.FC = () => {
     class: "",
     examType: "",
     subjects: [
-      {
-        name: "Math",
-        theoryGained: "",
-        theoryMax: "",
-        practicalGained: "",
-        practicalMax: "",
-      },
-      {
-        name: "Science",
-        theoryGained: "",
-        theoryMax: "",
-        practicalGained: "",
-        practicalMax: "",
-      },
-      {
-        name: "English",
-        theoryGained: "",
-        theoryMax: "",
-        practicalGained: "",
-        practicalMax: "",
-      },
-      {
-        name: "Social",
-        theoryGained: "",
-        theoryMax: "",
-        practicalGained: "",
-        practicalMax: "",
-      },
+      { name: "Math", theoryGained: "", theoryMax: "", practicalGained: "", practicalMax: "" },
+      { name: "Science", theoryGained: "", theoryMax: "", practicalGained: "", practicalMax: "" },
+      { name: "English", theoryGained: "", theoryMax: "", practicalGained: "", practicalMax: "" },
+      { name: "Social", theoryGained: "", theoryMax: "", practicalGained: "", practicalMax: "" },
     ] as SubjectItem[],
   });
 
@@ -144,7 +120,6 @@ const Students: React.FC = () => {
     )
   );
 
-  // Sections for Class Fee modal
   const classFeeSections = Array.from(
     new Set(
       classes
@@ -152,6 +127,13 @@ const Students: React.FC = () => {
         .map((c) => c.section)
     )
   );
+
+  const filtersComplete =
+    Boolean(filters.className) && Boolean(filters.section) && Boolean(filters.year);
+
+  // =========================
+  // Filter handlers
+  // =========================
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
 
@@ -185,22 +167,21 @@ const Students: React.FC = () => {
     }
 
     navigate(
-      `/dashboard/students/list?classId=${selectedClass.id}&year=${encodeURIComponent(
-        year
-      )}`
+      `/dashboard/students/list?classId=${selectedClass.id}&year=${encodeURIComponent(year)}`
     );
   };
 
   const handleAddStudent = () => {
     navigate("/students/add");
   };
+
+  // =========================
+  // Add Fee (individual) handlers
+  // =========================
   const handleFeeChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setFeeForm({
-      ...feeForm,
-      [e.target.name]: e.target.value,
-    });
+    setFeeForm({ ...feeForm, [e.target.name]: e.target.value });
   };
 
   const handleSubmitFee = (e: FormEvent) => {
@@ -232,6 +213,10 @@ const Students: React.FC = () => {
       sportsFee: "",
     });
   };
+
+  // =========================
+  // Class Fee handlers
+  // =========================
   const handleClassFeeChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -246,7 +231,6 @@ const Students: React.FC = () => {
   const handleSubmitClassFee = async (e: FormEvent) => {
     e.preventDefault();
 
-    // 1. Locate the exact class by name, section, and academic year
     const selectedClass = classes.find(
       (c) =>
         c.name === classFeeForm.class &&
@@ -259,7 +243,6 @@ const Students: React.FC = () => {
       return;
     }
 
-    // 2. Map form fee fields to backend FeeType enums
     const feeMappings: Array<{
       key: keyof typeof classFeeForm;
       feeType: string;
@@ -292,7 +275,6 @@ const Students: React.FC = () => {
         ? parseInt(classFeeForm.feeMonth, 10)
         : null;
 
-      // 3. Post fees to backend /student-fees/class
       const requests = feesToCreate.map((fee) =>
         studentApi.createClassFee({
           classId: selectedClass.id,
@@ -307,7 +289,6 @@ const Students: React.FC = () => {
       );
 
       const responses = await Promise.all(requests);
-
       const summaryMessages = responses.map((res) => res.data?.message).join("\n");
 
       alert(
@@ -315,8 +296,6 @@ const Students: React.FC = () => {
       );
 
       setShowClassFeeModal(false);
-
-      // Reset form
       setClassFeeForm({
         class: "",
         section: "",
@@ -339,13 +318,13 @@ const Students: React.FC = () => {
     }
   };
 
+  // =========================
+  // Result handlers
+  // =========================
   const handleResultChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setResultForm({
-      ...resultForm,
-      [e.target.name]: e.target.value,
-    });
+    setResultForm({ ...resultForm, [e.target.name]: e.target.value });
   };
 
   const handleSubjectChange = (
@@ -355,10 +334,7 @@ const Students: React.FC = () => {
   ) => {
     const updated = [...resultForm.subjects];
     updated[index][field] = value;
-    setResultForm({
-      ...resultForm,
-      subjects: updated,
-    });
+    setResultForm({ ...resultForm, subjects: updated });
   };
 
   const addSubjectRow = () => {
@@ -381,10 +357,7 @@ const Students: React.FC = () => {
     if (resultForm.subjects.length <= 1) return;
     const updated = [...resultForm.subjects];
     updated.splice(index, 1);
-    setResultForm({
-      ...resultForm,
-      subjects: updated,
-    });
+    setResultForm({ ...resultForm, subjects: updated });
   };
 
   const handleSubmitResult = (e: FormEvent) => {
@@ -401,43 +374,28 @@ const Students: React.FC = () => {
       class: "",
       examType: "",
       subjects: [
-        {
-          name: "Math",
-          theoryGained: "",
-          theoryMax: "",
-          practicalGained: "",
-          practicalMax: "",
-        },
-        {
-          name: "Science",
-          theoryGained: "",
-          theoryMax: "",
-          practicalGained: "",
-          practicalMax: "",
-        },
-        {
-          name: "English",
-          theoryGained: "",
-          theoryMax: "",
-          practicalGained: "",
-          practicalMax: "",
-        },
-        {
-          name: "Social",
-          theoryGained: "",
-          theoryMax: "",
-          practicalGained: "",
-          practicalMax: "",
-        },
+        { name: "Math", theoryGained: "", theoryMax: "", practicalGained: "", practicalMax: "" },
+        { name: "Science", theoryGained: "", theoryMax: "", practicalGained: "", practicalMax: "" },
+        { name: "English", theoryGained: "", theoryMax: "", practicalGained: "", practicalMax: "" },
+        { name: "Social", theoryGained: "", theoryMax: "", practicalGained: "", practicalMax: "" },
       ],
     });
   };
 
+  // =========================
+  // UI
+  // =========================
   return (
     <div className="students-page">
-      {/* Header */}
+      {/* ===== Header ===== */}
       <div className="students-header">
-        <h1 className="students-title">Students</h1>
+        <div>
+          <h1 className="students-title">Students</h1>
+          <p className="students-subtitle">
+            Manage students, fees, and academic results
+          </p>
+        </div>
+
         <div className="student-header-actions">
           <button className="student-add-btn" onClick={handleAddStudent}>
             <FaUserPlus /> Add Student
@@ -446,25 +404,34 @@ const Students: React.FC = () => {
             className="student-action-btn student-action-btn--fee"
             onClick={() => setShowAddFeeModal(true)}
           >
-             Add Fee
+            <FaMoneyBill /> Add Fee
           </button>
           <button
             className="student-action-btn student-action-btn--class"
             onClick={() => setShowClassFeeModal(true)}
           >
-             Class Fee
+            <FaUsers /> Class Fee
           </button>
           <button
             className="student-action-btn student-action-btn--upload"
             onClick={() => setShowResultModal(true)}
           >
-             Upload Result
+            <FaUpload /> Upload Result
           </button>
         </div>
       </div>
 
-      {/* Student Filter Card */}
+      {/* ===== Filter Card ===== */}
       <div className="filter-card">
+        <div className="filter-card-header">
+          <div>
+            <h2 className="filter-title">Find Students</h2>
+            <p className="filter-subtitle">
+              Select class, section and academic year to view the student list
+            </p>
+          </div>
+        </div>
+
         <div className="filter-row">
           {/* Class */}
           <div className="filter-group">
@@ -510,7 +477,7 @@ const Students: React.FC = () => {
             </select>
           </div>
 
-          {/* Academic Year */}
+          {/* Year */}
           <div className="filter-group">
             <label htmlFor="year">Academic Year</label>
             <select
@@ -522,7 +489,7 @@ const Students: React.FC = () => {
               disabled={loadingFilters}
             >
               <option value="">
-                {loadingFilters ? "Loading Academic Years..." : "Select Year"}
+                {loadingFilters ? "Loading Years..." : "Select Year"}
               </option>
               {academicYears.map((academicYear) => (
                 <option key={academicYear.id} value={academicYear.name}>
@@ -534,11 +501,20 @@ const Students: React.FC = () => {
         </div>
 
         <div className="filter-actions">
+          {!filtersComplete && !loadingFilters && (
+            <span className="filter-hint">
+              Select all three filters to continue
+            </span>
+          )}
           <button className="view-btn" onClick={handleViewStudents}>
             <FaEye /> View Students
           </button>
         </div>
       </div>
+
+      {/* =====================================================
+          ADD FEE FOR STUDENT MODAL
+          ===================================================== */}
       {showAddFeeModal && (
         <div
           className="modal-overlay"
@@ -546,7 +522,10 @@ const Students: React.FC = () => {
         >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>Add Fee for Student</h2>
+              <div className="modal-header-text">
+                <h2>Add Fee for Student</h2>
+                <p>Record fee details for a specific student</p>
+              </div>
               <button
                 className="modal-close-btn"
                 onClick={() => setShowAddFeeModal(false)}
@@ -599,6 +578,10 @@ const Students: React.FC = () => {
               </div>
 
               <div className="fee-breakdown-inputs">
+                <div className="fee-breakdown-title">
+                  <FaMoneyBill /> Fee Breakdown
+                </div>
+
                 <div className="form-row">
                   <div className="form-group">
                     <label>Tuition Fee</label>
@@ -608,6 +591,7 @@ const Students: React.FC = () => {
                       value={feeForm.tuitionFee}
                       onChange={handleFeeChange}
                       placeholder="₹"
+                      min="0"
                     />
                   </div>
                   <div className="form-group">
@@ -618,6 +602,7 @@ const Students: React.FC = () => {
                       value={feeForm.examFee}
                       onChange={handleFeeChange}
                       placeholder="₹"
+                      min="0"
                     />
                   </div>
                 </div>
@@ -631,6 +616,7 @@ const Students: React.FC = () => {
                       value={feeForm.busFee}
                       onChange={handleFeeChange}
                       placeholder="₹"
+                      min="0"
                     />
                   </div>
                   <div className="form-group">
@@ -641,6 +627,7 @@ const Students: React.FC = () => {
                       value={feeForm.libraryFee}
                       onChange={handleFeeChange}
                       placeholder="₹"
+                      min="0"
                     />
                   </div>
                 </div>
@@ -653,6 +640,7 @@ const Students: React.FC = () => {
                     value={feeForm.sportsFee}
                     onChange={handleFeeChange}
                     placeholder="₹"
+                    min="0"
                   />
                 </div>
               </div>
@@ -674,6 +662,9 @@ const Students: React.FC = () => {
         </div>
       )}
 
+      {/* =====================================================
+          ADD FEE FOR CLASS MODAL
+          ===================================================== */}
       {showClassFeeModal && (
         <div
           className="modal-overlay"
@@ -681,7 +672,10 @@ const Students: React.FC = () => {
         >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>Add Fee for Whole Class</h2>
+              <div className="modal-header-text">
+                <h2>Add Fee for Whole Class</h2>
+                <p>Apply a fee template to every student in a class</p>
+              </div>
               <button
                 className="modal-close-btn"
                 onClick={() => setShowClassFeeModal(false)}
@@ -692,7 +686,6 @@ const Students: React.FC = () => {
 
             <form onSubmit={handleSubmitClassFee} className="modal-form">
               <div className="form-row">
-                {/* Class */}
                 <div className="form-group">
                   <label>Class</label>
                   <select
@@ -710,7 +703,6 @@ const Students: React.FC = () => {
                   </select>
                 </div>
 
-                {/* Section */}
                 <div className="form-group">
                   <label>Section</label>
                   <select
@@ -721,9 +713,7 @@ const Students: React.FC = () => {
                     disabled={!classFeeForm.class}
                   >
                     <option value="">
-                      {!classFeeForm.class
-                        ? "Select Class First"
-                        : "Select Section"}
+                      {!classFeeForm.class ? "Select Class First" : "Select Section"}
                     </option>
                     {classFeeSections.map((section) => (
                       <option key={section} value={section}>
@@ -735,7 +725,6 @@ const Students: React.FC = () => {
               </div>
 
               <div className="form-row">
-                {/* Academic Year */}
                 <div className="form-group">
                   <label>Academic Year</label>
                   <select
@@ -753,7 +742,6 @@ const Students: React.FC = () => {
                   </select>
                 </div>
 
-                {/* Fee Month (Optional for Monthly Fees) */}
                 <div className="form-group">
                   <label>Fee Month (Optional)</label>
                   <select
@@ -779,6 +767,10 @@ const Students: React.FC = () => {
               </div>
 
               <div className="fee-breakdown-inputs">
+                <div className="fee-breakdown-title">
+                  <FaUsers /> Fee Breakdown
+                </div>
+
                 <div className="form-row">
                   <div className="form-group">
                     <label>Tuition Fee</label>
@@ -868,6 +860,10 @@ const Students: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* =====================================================
+          UPLOAD RESULT MODAL
+          ===================================================== */}
       {showResultModal && (
         <div
           className="modal-overlay"
@@ -878,7 +874,10 @@ const Students: React.FC = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h2>Upload Student Result</h2>
+              <div className="modal-header-text">
+                <h2>Upload Student Result</h2>
+                <p>Enter subject-wise theory and practical marks</p>
+              </div>
               <button
                 className="modal-close-btn"
                 onClick={() => setShowResultModal(false)}
@@ -950,7 +949,7 @@ const Students: React.FC = () => {
               </div>
 
               <div className="subject-table-wrapper">
-                <label>Subjects & Marks</label>
+                <label>Subjects &amp; Marks</label>
                 <div className="subject-table-scroll">
                   <table className="subject-input-table">
                     <thead>
@@ -982,11 +981,7 @@ const Students: React.FC = () => {
                               type="number"
                               value={sub.theoryGained}
                               onChange={(e) =>
-                                handleSubjectChange(
-                                  idx,
-                                  "theoryGained",
-                                  e.target.value
-                                )
+                                handleSubjectChange(idx, "theoryGained", e.target.value)
                               }
                               placeholder="0"
                               min="0"
@@ -997,11 +992,7 @@ const Students: React.FC = () => {
                               type="number"
                               value={sub.theoryMax}
                               onChange={(e) =>
-                                handleSubjectChange(
-                                  idx,
-                                  "theoryMax",
-                                  e.target.value
-                                )
+                                handleSubjectChange(idx, "theoryMax", e.target.value)
                               }
                               placeholder="0"
                               min="0"
@@ -1012,11 +1003,7 @@ const Students: React.FC = () => {
                               type="number"
                               value={sub.practicalGained}
                               onChange={(e) =>
-                                handleSubjectChange(
-                                  idx,
-                                  "practicalGained",
-                                  e.target.value
-                                )
+                                handleSubjectChange(idx, "practicalGained", e.target.value)
                               }
                               placeholder="0"
                               min="0"
@@ -1027,11 +1014,7 @@ const Students: React.FC = () => {
                               type="number"
                               value={sub.practicalMax}
                               onChange={(e) =>
-                                handleSubjectChange(
-                                  idx,
-                                  "practicalMax",
-                                  e.target.value
-                                )
+                                handleSubjectChange(idx, "practicalMax", e.target.value)
                               }
                               placeholder="0"
                               min="0"
@@ -1043,6 +1026,7 @@ const Students: React.FC = () => {
                               className="remove-subject-btn"
                               onClick={() => removeSubjectRow(idx)}
                               disabled={resultForm.subjects.length <= 1}
+                              title="Remove subject"
                             >
                               <FaTimes />
                             </button>

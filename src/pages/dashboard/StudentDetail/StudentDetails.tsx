@@ -6,6 +6,7 @@ import {
   FaCalendarAlt,
   FaChartLine,
   FaBook,
+  FaMoneyBill,   // ← new
 } from "react-icons/fa";
 import api from "../../../api/axios";
 import "./StudentDetails.css";
@@ -29,7 +30,6 @@ const StudentDetails = () => {
         setError("");
 
         const response = await api.get(`/students/${id}`);
-
         setStudent(response.data.data);
       } catch (err) {
         console.error("Failed to fetch student:", err);
@@ -37,13 +37,10 @@ const StudentDetails = () => {
         if (err.response?.status === 404) {
           setError("Student not found.");
         } else if (err.response?.status === 403) {
-          setError(
-            "You do not have permission to view this student."
-          );
+          setError("You do not have permission to view this student.");
         } else {
           setError(
-            err.response?.data?.message ||
-              "Failed to load student details."
+            err.response?.data?.message || "Failed to load student details."
           );
         }
       } finally {
@@ -51,67 +48,50 @@ const StudentDetails = () => {
       }
     };
 
-    if (id) {
-      fetchStudent();
-    }
+    if (id) fetchStudent();
   }, [id]);
 
   useEffect(() => {
-  const fetchExams = async () => {
-    if (!student?.classId) {
-      return;
-    }
+    const fetchExams = async () => {
+      if (!student?.classId) return;
 
-    try {
-      setExamsLoading(true);
-      setExamsError("");
+      try {
+        setExamsLoading(true);
+        setExamsError("");
 
-      const response = await api.get(
-        `/exams/class/${student.classId}`
-      );
+        const response = await api.get(`/exams/class/${student.classId}`);
+        const examData = response.data.data || [];
 
-      const examData = response.data.data || [];
-
-      // Only show exams for the student's academic year
-      const filteredExams = examData.filter(
-        (exam) =>
-          exam.academicYear === student.academicYear &&
-          exam.active
-      );
-
-      setExams(filteredExams);
-    } catch (err) {
-      console.error("Failed to fetch exams:", err);
-
-      if (err.response?.status === 403) {
-        setExamsError(
-          "You do not have permission to view exams."
+        const filteredExams = examData.filter(
+          (exam) =>
+            exam.academicYear === student.academicYear && exam.active
         );
-      } else {
+
+        setExams(filteredExams);
+      } catch (err) {
+        console.error("Failed to fetch exams:", err);
         setExamsError(
-          err.response?.data?.message ||
-            "Failed to load exams."
+          err.response?.status === 403
+            ? "You do not have permission to view exams."
+            : err.response?.data?.message || "Failed to load exams."
         );
+      } finally {
+        setExamsLoading(false);
       }
-    } finally {
-      setExamsLoading(false);
-    }
-  };
+    };
 
-  fetchExams();
-}, [student]);
+    fetchExams();
+  }, [student]);
 
+  const handleBack = () => navigate("/dashboard/students");
 
-  const handleBack = () => {
-    navigate("/dashboard/students");
-  };
+  const handleViewFees = () =>
+    navigate(`/dashboard/students/${student.id}/fees`);
 
   if (loading) {
     return (
       <div className="student-details-page">
-        <div className="loading">
-          Loading student details...
-        </div>
+        <div className="loading">Loading student details...</div>
       </div>
     );
   }
@@ -119,18 +99,10 @@ const StudentDetails = () => {
   if (error || !student) {
     return (
       <div className="not-found-container">
-
-        <h2>
-          {error || "Student not found"}
-        </h2>
-
-        <button
-          className="back-btn"
-          onClick={handleBack}
-        >
+        <h2>{error || "Student not found"}</h2>
+        <button className="back-btn" onClick={handleBack}>
           <FaArrowLeft /> Back
         </button>
-
       </div>
     );
   }
@@ -138,267 +110,170 @@ const StudentDetails = () => {
   return (
     <div className="student-details-page">
       <div className="details-header">
-        <button
-          className="back-btn"
-          onClick={handleBack}
-        >
+        <button className="back-btn" onClick={handleBack}>
           <FaArrowLeft /> Back
         </button>
-
-        <h1 className="details-title">
-          Student Profile
-        </h1>
-
+        <h1 className="details-title">Student Profile</h1>
       </div>
 
+      {/* ===== Profile Card (with View Fees button) ===== */}
       <div className="profile-card">
-
         <div className="profile-avatar">
-
           <img
             src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
               `${student.firstName} ${student.lastName || ""}`
             )}&background=6366f1&color=fff&size=120`}
             alt="Profile"
           />
-
         </div>
 
         <div className="profile-info">
-
           <h2>
             {student.firstName} {student.lastName || ""}
           </h2>
 
           <div className="profile-tags">
-
-            <span className="tag">
-              {student.className}
-            </span>
-
-            <span className="tag">
-              Section {student.section}
-            </span>
-
-            <span className="tag">
-              Roll No: {student.roleNumber}
-            </span>
-
+            <span className="tag">{student.className}</span>
+            <span className="tag">Section {student.section}</span>
+            <span className="tag">Roll No: {student.roleNumber}</span>
           </div>
 
           <p className="profile-dob">
             DOB: {student.dateOfBirth || "Not available"}
           </p>
-
         </div>
 
+        {/* RIGHT SIDE — actions */}
+        <div className="profile-actions">
+          <button className="fees-btn" onClick={handleViewFees}>
+            <FaMoneyBill /> View Fees
+          </button>
+        </div>
       </div>
 
       <div className="details-grid">
-
         {/* Personal Information */}
-
         <div className="detail-card">
-
           <h3>
             <FaUser /> Personal Information
           </h3>
-
           <div className="detail-item">
-            <strong>Email:</strong>{" "}
-            {student.email || "Not available"}
+            <strong>Email:</strong> {student.email || "Not available"}
           </div>
-
           <div className="detail-item">
-            <strong>Phone:</strong>{" "}
-            {student.phone || "Not available"}
+            <strong>Phone:</strong> {student.phone || "Not available"}
           </div>
-
           <div className="detail-item">
-            <strong>Address:</strong>{" "}
-            {student.address || "Not available"}
+            <strong>Address:</strong> {student.address || "Not available"}
           </div>
-
           <div className="detail-item">
             <strong>Status:</strong>{" "}
             {student.active ? "Active" : "Inactive"}
           </div>
-
         </div>
 
-
         {/* Parent Information */}
-
         <div className="detail-card">
-
           <h3>
             <FaUser /> Parent / Guardian
           </h3>
-
           <div className="detail-item">
             <strong>Parent Name:</strong>{" "}
             {student.parentName || "Not available"}
           </div>
-
           <div className="detail-item">
             <strong>Contact:</strong>{" "}
             {student.parentPhone || "Not available"}
           </div>
-
         </div>
 
-
         {/* Class Details */}
-
         <div className="detail-card">
-
           <h3>
             <FaCalendarAlt /> Academic Details
           </h3>
-
           <div className="detail-item">
-            <strong>Class:</strong>{" "}
-            {student.className || "Not available"}
+            <strong>Class:</strong> {student.className || "Not available"}
           </div>
-
           <div className="detail-item">
-            <strong>Section:</strong>{" "}
-            {student.section || "Not available"}
+            <strong>Section:</strong> {student.section || "Not available"}
           </div>
-
           <div className="detail-item">
             <strong>Academic Year:</strong>{" "}
             {student.academicYear || "Not available"}
           </div>
-
           <div className="detail-item">
             <strong>School:</strong>{" "}
             {student.schoolCode || "Not available"}
           </div>
-
         </div>
 
-
         {/* Attendance */}
-
         <div className="detail-card">
-
           <h3>
             <FaChartLine /> Attendance
           </h3>
-
           <div className="attendance-stats">
-
             <div className="attendance-item">
-              <span className="attendance-label">
-                Present
-              </span>
-
-              <span className="attendance-value">
-                —
-              </span>
+              <span className="attendance-label">Present</span>
+              <span className="attendance-value">—</span>
             </div>
-
             <div className="attendance-item">
-              <span className="attendance-label">
-                Absent
-              </span>
-
-              <span className="attendance-value">
-                —
-              </span>
+              <span className="attendance-label">Absent</span>
+              <span className="attendance-value">—</span>
             </div>
-
             <div className="attendance-item">
-              <span className="attendance-label">
-                Total Days
-              </span>
-
-              <span className="attendance-value">
-                —
-              </span>
+              <span className="attendance-label">Total Days</span>
+              <span className="attendance-value">—</span>
             </div>
-
           </div>
-
           <div className="attendance-percentage">
-
-            <span>
-              Overall Attendance
-            </span>
-
-            <span className="percentage-value">
-              —
-            </span>
-
+            <span>Overall Attendance</span>
+            <span className="percentage-value">—</span>
           </div>
-
         </div>
 
-
         {/* Results */}
-
         <div className="detail-card full-width">
-
           <div className="results-header">
-
             <h3>
               <FaBook /> Results
             </h3>
-
           </div>
 
-        <div className="results-list">
+          <div className="results-list">
+            {examsLoading && (
+              <p className="no-data">Loading exams...</p>
+            )}
+            {examsError && <p className="no-data">{examsError}</p>}
+            {!examsLoading && !examsError && exams.length === 0 && (
+              <p className="no-data">
+                No exams found for this academic year.
+              </p>
+            )}
 
-  {examsLoading && (
-    <p className="no-data">
-      Loading exams...
-    </p>
-  )}
-
-  {examsError && (
-    <p className="no-data">
-      {examsError}
-    </p>
-  )}
-
-  {!examsLoading && !examsError && exams.length === 0 && (
-    <p className="no-data">
-      No exams found for this academic year.
-    </p>
-  )}
-
-  {!examsLoading &&
-    !examsError &&
-    exams.map((exam) => (
-      <div
-        key={exam.id}
-        className="result-exam-item"
-        onClick={() =>
-          navigate(
-            `/dashboard/students/${student.id}/results/${exam.id}`
-          )
-        }
-      >
-        <div className="result-exam-info">
-          <h4>{exam.name}</h4>
-
-          <span>
-            {exam.startDate || "Date not available"}
-          </span>
+            {!examsLoading &&
+              !examsError &&
+              exams.map((exam) => (
+                <div
+                  key={exam.id}
+                  className="result-exam-item"
+                  onClick={() =>
+                    navigate(
+                      `/dashboard/students/${student.id}/results/${exam.id}`
+                    )
+                  }
+                >
+                  <div className="result-exam-info">
+                    <h4>{exam.name}</h4>
+                    <span>{exam.startDate || "Date not available"}</span>
+                  </div>
+                  <span className="result-exam-arrow">→</span>
+                </div>
+              ))}
+          </div>
         </div>
-
-        <span className="result-exam-arrow">
-          →
-        </span>
       </div>
-    ))}
-</div>
-
-        </div>
-
-      </div>
-
     </div>
   );
 };
