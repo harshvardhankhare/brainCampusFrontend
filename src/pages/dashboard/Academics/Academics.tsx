@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import api from "../../../api/axios";
 import "./Academics.css";
+import { useNavigate } from "react-router-dom";
 interface AcademicYear {
   id: number;
   name: string;
@@ -65,6 +66,7 @@ interface GroupedClass {
 }
 
 const Academics: React.FC = () => {
+  const navigate = useNavigate();
   const [academicYears, setAcademicYears] = useState<AcademicYear[]>([]);
   const [selectedYear, setSelectedYear] = useState<string>("");
 
@@ -279,18 +281,13 @@ const Academics: React.FC = () => {
         </div>
 
         <div className="header-actions">
-          <button
-            className="action-btn primary"
-            onClick={() => setShowAddClassModal(true)}
-          >
-            <FaPlus /> Add Class
-          </button>
-          <button
-            className="action-btn secondary"
-            onClick={() => setShowAddSubjectModal(true)}
-          >
-            <FaPlus /> Add Subject
-          </button>
+        <button
+        className="student-add-btn"
+        onClick={() => navigate("/dashboard/academics/setup")}
+        >
+        <FaPlus size={14}  /> Manage Classes & Subjects
+        </button>
+
         </div>
       </div>
 

@@ -1,0 +1,98 @@
+/* =========================================================
+   theme.css - Global Design System
+   ========================================================= */
+
+:root {
+  /* -------------------------------------------------------
+     1. BRAND PALETTE (7 Shades)
+     This is the actual color. If the school wants Blue, 
+     you change #6366f1 to #3b82f6 here, and the WHOLE app updates.
+     ------------------------------------------------------- */
+  --brand-50:  #eef2ff;
+  --brand-100: #e0e7ff;
+  --brand-200: #c7d2fe;
+  --brand-300: #a5b4fc;
+  --brand-400: #818cf8;
+  --brand-500: #6366f1;  /* Base Brand Color */
+  --brand-600: #4f46e5;  /* Hover / Active */
+  --brand-700: #4338ca;
+  --brand-800: #3730a3;
+
+  /* -------------------------------------------------------
+     2. NEUTRAL PALETTE (Grays/Slates)
+     Used for text, borders, backgrounds, and cards.
+     ------------------------------------------------------- */
+  --neutral-50:  #f9fafb;
+  --neutral-100: #f3f4f6;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d1d5db;
+  --neutral-400: #9ca3af;
+  --neutral-500: #6b7280;
+  --neutral-600: #4b5563;
+  --neutral-700: #374151;
+  --neutral-800: #1f2937;
+  --neutral-900: #111827;
+
+  /* -------------------------------------------------------
+     3. SEMANTIC VARIABLES (What the UI actually uses)
+     ------------------------------------------------------- */
+  
+  /* Backgrounds */
+  --bg-app: var(--neutral-50);
+  --bg-card: #ffffff;
+  --bg-input: var(--neutral-50);
+  
+  /* Text */
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-500);
+  --text-inverse: #ffffff;
+  
+  /* Borders */
+  --border-base: var(--neutral-200);
+  --border-focus: var(--brand-500);
+
+  /* Buttons - Primary */
+  --btn-primary-bg: linear-gradient(135deg, var(--brand-500), #8b5cf6);
+  --btn-primary-hover: linear-gradient(135deg, var(--brand-600), #7c3aed);
+  --btn-primary-text: #ffffff;
+  --btn-primary-shadow: rgba(99, 102, 241, 0.3);
+
+  /* Buttons - Secondary (Light Indigo) */
+  --btn-secondary-bg: var(--brand-50);
+  --btn-secondary-text: var(--brand-600);
+  --btn-secondary-hover: var(--brand-100);
+
+  /* Buttons - Danger (Red) */
+  --btn-danger-bg: #fee2e2;
+  --btn-danger-text: #dc2626;
+  --btn-danger-hover: #fecaca;
+
+  /* Buttons - Success (Green) */
+  --btn-success-bg: #10b981;
+  --btn-success-text: #ffffff;
+}
+
+/* =========================================================
+   DARK THEME OVERRIDES
+   If the user selects "Dark Mode" in Settings, we just swap
+   the semantic variables. We DO NOT touch the brand palette.
+   ========================================================= */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-app: var(--neutral-900);
+  --bg-card: var(--neutral-800);
+  --bg-input: var(--neutral-900);
+  
+  /* Text */
+  --text-primary: var(--neutral-50);
+  --text-secondary: var(--neutral-400);
+  --text-inverse: var(--neutral-900);
+  
+  /* Borders */
+  --border-base: var(--neutral-700);
+
+  /* Buttons - Secondary (Dark mode version) */
+  --btn-secondary-bg: rgba(99, 102, 241, 0.15);
+  --btn-secondary-text: var(--brand-300);
+  --btn-secondary-hover: rgba(99, 102, 241, 0.25);
+}

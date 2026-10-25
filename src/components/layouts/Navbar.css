@@ -1,177 +1,132 @@
-:root{
-    --sidebar-width:270px;
+:root {
+  --sidebar-width: 270px;
 }
 
-.navbar{
-
-    position:sticky;
-
-    top:0;
-
-    height:72px;
-
-    background:#fff;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 28px;
-
-    border-bottom:1px solid #e5e7eb;
-
-    z-index:900;
+.navbar {
+  position: sticky;
+  top: 0;
+  height: 50px;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--border-base);
+  z-index: 900;
 }
 
-.navbar-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
-.page-title{
-
-    font-size:22px;
-
-    font-weight:700;
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
-.hamburger-btn{
-
-    width:42px;
-
-    height:42px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#f3f4f6;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    cursor:pointer;
-
-    transition:.2s;
+.hamburger-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 10px;
+  background: var(--neutral-100);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.hamburger-btn:hover{
-
-    background:#eef2ff;
-
-    color:#4f46e5;
+.hamburger-btn:hover {
+  background: var(--brand-50);
+  color: var(--brand-600);
 }
 
 /* Search */
-
-.search-wrapper{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:0 14px;
-
-    width:320px;
-
-    height:42px;
-
-    border:1px solid #e5e7eb;
-
-    border-radius:10px;
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  width: 320px;
+  height: 42px;
+  border: 1px solid var(--border-base);
+  border-radius: 10px;
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  transition: all 0.2s;
 }
 
-.search-input{
+.search-wrapper:focus-within {
+  border-color: var(--border-focus);
+  background: var(--bg-card);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
 
-    flex:1;
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
 
-    border:none;
-
-    outline:none;
-
-    background:none;
+.search-input::placeholder {
+  color: var(--text-secondary);
 }
 
 /* Right */
-
-.navbar-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.navbar-actions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.icon-btn{
-
-    width:42px;
-
-    height:42px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:transparent;
-
-    cursor:pointer;
-
-    display:grid;
-
-    place-items:center;
-
-    transition:.2s;
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s;
 }
 
-.icon-btn:hover{
-
-    background:#f3f4f6;
+.icon-btn:hover {
+  background: var(--neutral-100);
+  color: var(--text-primary);
 }
 
-.user-profile{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding-left:16px;
-
-    border-left:1px solid #e5e7eb;
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 16px;
+  border-left: 1px solid var(--border-base);
 }
 
-.user-avatar-nav{
-
-    width:40px;
-
-    height:40px;
-
-    border-radius:50%;
+.user-avatar-nav {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
-.user-name-nav{
-
-    font-weight:600;
+.user-name-nav {
+  font-weight: 600;
+  color: var(--text-primary);
 }

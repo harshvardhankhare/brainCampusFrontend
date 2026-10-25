@@ -12,19 +12,15 @@
   margin: 0;
   font-size: 28px;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .dashboard-header p {
   margin: 6px 0 0;
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
-
-/* =========================
-   Main Stats
-   ========================= */
 
 .dashboard-stats-grid {
   display: grid;
@@ -37,10 +33,11 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: white;
+  background: var(--bg-card);
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-base);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .stat-icon {
@@ -50,8 +47,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background: #eef2ff;
-  color: #6366f1;
+  background: var(--brand-50);
+  color: var(--brand-500);
   font-size: 20px;
   flex-shrink: 0;
 }
@@ -63,19 +60,14 @@
 }
 
 .stat-content span {
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 13px;
 }
 
 .stat-content strong {
-  color: #1f2937;
+  color: var(--text-primary);
   font-size: 22px;
 }
-
-
-/* =========================
-   Section
-   ========================= */
 
 .dashboard-section {
   margin-bottom: 28px;
@@ -86,19 +78,14 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 14px;
-  color: #6366f1;
+  color: var(--brand-500);
 }
 
 .section-title h2 {
   margin: 0;
-  color: #1f2937;
+  color: var(--text-primary);
   font-size: 19px;
 }
-
-
-/* =========================
-   Financial Cards
-   ========================= */
 
 .financial-grid {
   display: grid;
@@ -107,10 +94,11 @@
 }
 
 .financial-card {
-  background: white;
+  background: var(--bg-card);
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-base);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .financial-card-header {
@@ -121,13 +109,13 @@
 }
 
 .financial-card-header span {
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
 .financial-card strong {
   font-size: 24px;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .income-icon,
@@ -139,25 +127,19 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  background: #f3f4f6;
+  background: var(--neutral-100);
 }
-
 .income-icon {
-  color: #16a34a;
+  color: var(--btn-success-bg);
 }
 
 .expense-icon {
-  color: #dc2626;
+  color: var(--btn-danger-text);
 }
 
 .net-icon {
-  color: #6366f1;
+  color: var(--brand-500);
 }
-
-
-/* =========================
-   Two Column
-   ========================= */
 
 .dashboard-two-column {
   display: grid;
@@ -167,38 +149,34 @@
 }
 
 .dashboard-panel {
-  background: white;
+  background: var(--bg-card);
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-base);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
 .panel-header {
   padding: 18px 20px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-base);
 }
 
 .panel-header h2 {
   margin: 0;
   font-size: 17px;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .panel-body {
   padding: 8px 20px;
 }
 
-
-/* =========================
-   Summary Rows
-   ========================= */
-
 .summary-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-base);
 }
 
 .summary-row:last-child {
@@ -206,19 +184,14 @@
 }
 
 .summary-row span {
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
 .summary-row strong {
-  color: #1f2937;
+  color: var(--text-primary);
   font-size: 14px;
 }
-
-
-/* =========================
-   Expense
-   ========================= */
 
 .expense-summary {
   margin-bottom: 20px;
@@ -232,19 +205,14 @@
 }
 
 .expense-total span {
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
 .expense-total strong {
-  color: #1f2937;
+  color: var(--text-primary);
   font-size: 22px;
 }
-
-
-/* =========================
-   Loading / Error
-   ========================= */
 
 .dashboard-loading,
 .dashboard-error {
@@ -252,17 +220,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6b7280;
+  color: var(--text-secondary);
 }
 
 .dashboard-error {
-  color: #dc2626;
+  color: var(--btn-danger-text);
 }
-
-
-/* =========================
-   Responsive
-   ========================= */
 
 @media (max-width: 1100px) {
   .dashboard-stats-grid {

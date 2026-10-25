@@ -22,6 +22,8 @@ import AuditLogViewer from '../pages/dashboard/ApiDashboard/AuditLogViewer';
 import AddFee from '../pages/dashboard/Fees/AddFee';
 import FeeTypes from '../pages/dashboard/Fees/FeeTypes';
 import Settings from '../pages/dashboard/settings/Settings';
+import AddStudent from '../pages/dashboard/students/AddStudent';
+import AcademicSetup from '../pages/dashboard/Academics/AcademicSetup';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -61,7 +63,10 @@ const AppRoutes = () => {
         <Route path="api-dashboard" element={<ApiDashboard/>}/>
         <Route path="api-dashboard/logs" element={<AuditLogViewer/>}/>
         <Route path="students/fees/add" element={<AddFee />} />
+        <Route path="students/add" element={<AddStudent />} />
         <Route path="settings/fee-types" element={<FeeTypes />} />
+        <Route path="academics/setup" element={<AcademicSetup />} />
+
       </Route>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="*" element={<NotFound/>} />

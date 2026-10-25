@@ -118,20 +118,9 @@ const Students: React.FC = () => {
     )
   );
 
-  const classFeeSections = Array.from(
-    new Set(
-      classes
-        .filter((c) => !classFeeForm.class || c.name === classFeeForm.class)
-        .map((c) => c.section)
-    )
-  );
 
   const filtersComplete =
     Boolean(filters.className) && Boolean(filters.section) && Boolean(filters.year);
-
-  // =========================
-  // Filter handlers
-  // =========================
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
 
@@ -170,12 +159,9 @@ const Students: React.FC = () => {
   };
 
   const handleAddStudent = () => {
-    navigate("/students/add");
+    navigate("/dashboard/students/add");
   };
 
-  // =========================
-  // Add Fee (individual) handlers
-  // =========================
   const handleFeeChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -272,10 +258,6 @@ const Students: React.FC = () => {
       ],
     });
   };
-
-  // =========================
-  // UI
-  // =========================
   return (
     <div className="students-page">
       {/* ===== Header ===== */}
