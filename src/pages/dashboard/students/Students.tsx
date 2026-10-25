@@ -47,9 +47,7 @@ const Students: React.FC = () => {
   });
 
   const [showAddFeeModal, setShowAddFeeModal] = useState<boolean>(false);
-  const [showClassFeeModal, setShowClassFeeModal] = useState<boolean>(false);
   const [showResultModal, setShowResultModal] = useState<boolean>(false);
-  const [submittingClassFee, setSubmittingClassFee] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -214,113 +212,6 @@ const Students: React.FC = () => {
     });
   };
 
-  // =========================
-  // Class Fee handlers
-  // =========================
-  const handleClassFeeChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setClassFeeForm((prev) => ({
-      ...prev,
-      [name]: value,
-      ...(name === "class" ? { section: "" } : {}),
-    }));
-  };
-
-  const handleSubmitClassFee = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const selectedClass = classes.find(
-      (c) =>
-        c.name === classFeeForm.class &&
-        c.section === classFeeForm.section &&
-        c.academicYear === classFeeForm.year
-    );
-
-    if (!selectedClass) {
-      alert("Selected class, section, and academic year combination not found.");
-      return;
-    }
-
-    const feeMappings: Array<{
-      key: keyof typeof classFeeForm;
-      feeType: string;
-      label: string;
-    }> = [
-      { key: "tuitionFee", feeType: "TUITION", label: "Tuition" },
-      { key: "examFee", feeType: "EXAM", label: "Exam" },
-      { key: "busFee", feeType: "TRANSPORT", label: "Bus" },
-      { key: "libraryFee", feeType: "LIBRARY", label: "Library" },
-      { key: "sportsFee", feeType: "SPORTS", label: "Sports" },
-    ];
-
-    const feesToCreate = feeMappings
-      .map(({ key, feeType, label }) => ({
-        feeType,
-        label,
-        amount: parseFloat(classFeeForm[key]),
-      }))
-      .filter((item) => !isNaN(item.amount) && item.amount > 0);
-
-    if (feesToCreate.length === 0) {
-      alert("Please enter at least one fee amount greater than 0.");
-      return;
-    }
-
-    try {
-      setSubmittingClassFee(true);
-
-      const parsedMonth = classFeeForm.feeMonth
-        ? parseInt(classFeeForm.feeMonth, 10)
-        : null;
-
-      const requests = feesToCreate.map((fee) =>
-        studentApi.createClassFee({
-          classId: selectedClass.id,
-          academicYear: classFeeForm.year,
-          feeType: fee.feeType,
-          feeMonth: parsedMonth,
-          amount: fee.amount,
-          description: `${fee.label} Fee for ${classFeeForm.class} ${
-            classFeeForm.section
-          }${parsedMonth ? ` (Month ${parsedMonth})` : ""}`,
-        })
-      );
-
-      const responses = await Promise.all(requests);
-      const summaryMessages = responses.map((res) => res.data?.message).join("\n");
-
-      alert(
-        `Fees assigned successfully to ${classFeeForm.class} ${classFeeForm.section}!\n\n${summaryMessages}`
-      );
-
-      setShowClassFeeModal(false);
-      setClassFeeForm({
-        class: "",
-        section: "",
-        year: "",
-        feeMonth: "",
-        tuitionFee: "",
-        examFee: "",
-        busFee: "",
-        libraryFee: "",
-        sportsFee: "",
-      });
-    } catch (error: any) {
-      console.error("Failed to add class fee:", error);
-      const message =
-        error.response?.data?.message ||
-        "Failed to add class fee. Please try again.";
-      alert(message);
-    } finally {
-      setSubmittingClassFee(false);
-    }
-  };
-
-  // =========================
-  // Result handlers
-  // =========================
   const handleResultChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -401,14 +292,14 @@ const Students: React.FC = () => {
             <FaUserPlus /> Add Student
           </button>
           <button
-            className="student-action-btn student-action-btn--fee"
-            onClick={() => setShowAddFeeModal(true)}
+             className="student-action-btn student-action-btn--fee"
+              onClick={() => navigate("/dashboard/students/fees/add")}
           >
             <FaMoneyBill /> Add Fee
           </button>
           <button
-            className="student-action-btn student-action-btn--class"
-            onClick={() => setShowClassFeeModal(true)}
+            className="student-action-btn student-action-btn--fee"
+              onClick={() => navigate("/dashboard/students/fees/add")}
           >
             <FaUsers /> Class Fee
           </button>
@@ -655,205 +546,6 @@ const Students: React.FC = () => {
                 </button>
                 <button type="submit" className="submit-btn">
                   Add Fee
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* =====================================================
-          ADD FEE FOR CLASS MODAL
-          ===================================================== */}
-      {showClassFeeModal && (
-        <div
-          className="modal-overlay"
-          onClick={() => setShowClassFeeModal(false)}
-        >
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <div className="modal-header-text">
-                <h2>Add Fee for Whole Class</h2>
-                <p>Apply a fee template to every student in a class</p>
-              </div>
-              <button
-                className="modal-close-btn"
-                onClick={() => setShowClassFeeModal(false)}
-              >
-                <FaTimes />
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmitClassFee} className="modal-form">
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Class</label>
-                  <select
-                    name="class"
-                    value={classFeeForm.class}
-                    onChange={handleClassFeeChange}
-                    required
-                  >
-                    <option value="">Select Class</option>
-                    {classNames.map((className) => (
-                      <option key={className} value={className}>
-                        {className}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label>Section</label>
-                  <select
-                    name="section"
-                    value={classFeeForm.section}
-                    onChange={handleClassFeeChange}
-                    required
-                    disabled={!classFeeForm.class}
-                  >
-                    <option value="">
-                      {!classFeeForm.class ? "Select Class First" : "Select Section"}
-                    </option>
-                    {classFeeSections.map((section) => (
-                      <option key={section} value={section}>
-                        {section}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Academic Year</label>
-                  <select
-                    name="year"
-                    value={classFeeForm.year}
-                    onChange={handleClassFeeChange}
-                    required
-                  >
-                    <option value="">Select Year</option>
-                    {academicYears.map((academicYear) => (
-                      <option key={academicYear.id} value={academicYear.name}>
-                        {academicYear.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label>Fee Month (Optional)</label>
-                  <select
-                    name="feeMonth"
-                    value={classFeeForm.feeMonth}
-                    onChange={handleClassFeeChange}
-                  >
-                    <option value="">Annual / Non-Monthly</option>
-                    <option value="1">1 - January</option>
-                    <option value="2">2 - February</option>
-                    <option value="3">3 - March</option>
-                    <option value="4">4 - April</option>
-                    <option value="5">5 - May</option>
-                    <option value="6">6 - June</option>
-                    <option value="7">7 - July</option>
-                    <option value="8">8 - August</option>
-                    <option value="9">9 - September</option>
-                    <option value="10">10 - October</option>
-                    <option value="11">11 - November</option>
-                    <option value="12">12 - December</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="fee-breakdown-inputs">
-                <div className="fee-breakdown-title">
-                  <FaUsers /> Fee Breakdown
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>Tuition Fee</label>
-                    <input
-                      type="number"
-                      name="tuitionFee"
-                      value={classFeeForm.tuitionFee}
-                      onChange={handleClassFeeChange}
-                      placeholder="₹"
-                      min="0"
-                      step="0.01"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Exam Fee</label>
-                    <input
-                      type="number"
-                      name="examFee"
-                      value={classFeeForm.examFee}
-                      onChange={handleClassFeeChange}
-                      placeholder="₹"
-                      min="0"
-                      step="0.01"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>Bus / Transport Fee</label>
-                    <input
-                      type="number"
-                      name="busFee"
-                      value={classFeeForm.busFee}
-                      onChange={handleClassFeeChange}
-                      placeholder="₹"
-                      min="0"
-                      step="0.01"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Library Fee</label>
-                    <input
-                      type="number"
-                      name="libraryFee"
-                      value={classFeeForm.libraryFee}
-                      onChange={handleClassFeeChange}
-                      placeholder="₹"
-                      min="0"
-                      step="0.01"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label>Sports Fee</label>
-                  <input
-                    type="number"
-                    name="sportsFee"
-                    value={classFeeForm.sportsFee}
-                    onChange={handleClassFeeChange}
-                    placeholder="₹"
-                    min="0"
-                    step="0.01"
-                  />
-                </div>
-              </div>
-
-              <div className="form-actions">
-                <button
-                  type="button"
-                  className="cancel-btn"
-                  onClick={() => setShowClassFeeModal(false)}
-                  disabled={submittingClassFee}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="submit-btn"
-                  disabled={submittingClassFee}
-                >
-                  {submittingClassFee ? "Adding Fees..." : "Add Class Fee"}
                 </button>
               </div>
             </form>
