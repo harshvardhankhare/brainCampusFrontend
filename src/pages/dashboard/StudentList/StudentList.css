@@ -23,13 +23,13 @@
 .list-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0;
 }
 
 .list-subtitle {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin: 0.2rem 0 0;
 }
 
@@ -41,10 +41,10 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 1.1rem;
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
   border-radius: 8px;
-  color: #374151;
+  color: var(--text-secondary);
   font-weight: 500;
   font-size: 0.9rem;
   cursor: pointer;
@@ -53,14 +53,12 @@
 }
 
 .back-btn:hover {
-  background: #f9fafb;
-  border-color: #c7d2fe;
-  color: #4f46e5;
+  background: var(--bg-input);
+  border-color: var(--brand-200);
+  color: var(--brand-600);
 }
 
-/* Defensive: make sure the back-arrow SVG shows even with a
-   broken global reset. `size={14}` in JSX sets the attributes,
-   this guarantees the fill. */
+/* Defensive: make sure the back-arrow SVG shows */
 .back-btn > svg {
   display: inline-block !important;
   width: 14px !important;
@@ -81,12 +79,16 @@
 /* ============================================================
    3. TABLE
    ============================================================ */
-.table-wrapper {
-  background: #ffffff;
+.table-card {
+  background: var(--bg-card);
   border-radius: 12px;
-  overflow-x: auto;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-base);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.table-wrapper {
+  overflow-x: auto;
 }
 
 .student-table {
@@ -97,15 +99,15 @@
 }
 
 .student-table thead {
-  background: #f9fafb;
-  border-bottom: 2px solid #e5e7eb;
+  background: var(--bg-input);
+  border-bottom: 2px solid var(--border-base);
 }
 
 .student-table th {
   padding: 0.85rem 1rem;
   text-align: left;
   font-weight: 600;
-  color: #374151;
+  color: var(--text-secondary);
   white-space: nowrap;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -114,8 +116,8 @@
 
 .student-table td {
   padding: 0.85rem 1rem;
-  border-bottom: 1px solid #f3f4f6;
-  color: #1f2937;
+  border-bottom: 1px solid var(--border-base);
+  color: var(--text-primary);
   vertical-align: middle;
 }
 
@@ -124,7 +126,7 @@
 }
 
 .student-table tbody tr:hover {
-  background: #f9fafb;
+  background: var(--bg-input);
 }
 
 .roll-chip {
@@ -132,8 +134,8 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.82rem;
   font-weight: 600;
-  background: #f3f4f6;
-  color: #374151;
+  background: var(--neutral-100);
+  color: var(--text-secondary);
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
   white-space: nowrap;
@@ -145,7 +147,7 @@
 }
 
 /* ============================================================
-   4. ACTION BUTTONS (ICONS) — the key part
+   4. ACTION BUTTONS (ICONS)
    ============================================================ */
 .action-btns {
   display: flex;
@@ -170,9 +172,6 @@
   overflow: visible;
 }
 
-/* Force the SVG icon to render no matter what global CSS says.
-   `size={16}` in JSX already sets width/height attributes;
-   this guarantees the fill and visibility. */
 .action-btn > svg {
   display: block !important;
   width: 16px !important;
@@ -193,31 +192,31 @@
   stroke: currentColor !important;
 }
 
-/* Colour variants */
+/* Colour variants mapped to semantic theme variables */
 .view-btn {
-  background: #e0f2fe;
-  color: #0284c7;
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
 }
 .view-btn:hover {
-  background: #bae6fd;
+  background: var(--btn-secondary-hover);
   transform: translateY(-1px);
 }
 
 .edit-btn {
-  background: #eef2ff;
-  color: #4f46e5;
+  background: var(--brand-50);
+  color: var(--brand-600);
 }
 .edit-btn:hover {
-  background: #c7d2fe;
+  background: var(--brand-100);
   transform: translateY(-1px);
 }
 
 .delete-btn {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--btn-danger-bg);
+  color: var(--btn-danger-text);
 }
 .delete-btn:hover {
-  background: #fecaca;
+  background: var(--btn-danger-hover);
   transform: translateY(-1px);
 }
 
@@ -225,20 +224,20 @@
    5. STATES (loading / error / empty)
    ============================================================ */
 .state-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
   border-radius: 12px;
   padding: 3rem 1rem;
   text-align: center;
-  color: #6b7280;
+  color: var(--text-secondary);
 }
 
 .spinner {
   width: 32px;
   height: 32px;
   margin: 0 auto 0.75rem;
-  border: 3px solid #e5e7eb;
-  border-top-color: #6366f1;
+  border: 3px solid var(--border-base);
+  border-top-color: var(--brand-500);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -250,9 +249,9 @@
 }
 
 .error {
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #b91c1c;
+  background: var(--btn-danger-bg);
+  border: 1px solid var(--btn-danger-text);
+  color: var(--btn-danger-text);
   padding: 0.8rem 1rem;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -265,8 +264,8 @@
 }
 
 .empty-icon {
-  color: #c7d2fe !important;
-  fill: #c7d2fe !important;
+  color: var(--brand-200) !important;
+  fill: var(--brand-200) !important;
   margin-bottom: 0.75rem;
   display: inline-block !important;
 }
@@ -274,50 +273,24 @@
 .empty-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--text-primary);
   margin: 0 0 0.25rem;
 }
 
 .empty-sub {
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: var(--text-secondary);
   margin: 0;
 }
 
 .no-data {
   text-align: center;
-  color: #9ca3af;
+  color: var(--text-secondary);
   padding: 2rem !important;
 }
 
 /* ============================================================
-   6. RESPONSIVE
-   ============================================================ */
-@media (max-width: 640px) {
-  .list-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .list-title {
-    font-size: 1.2rem;
-  }
-}
-/* Wrap the table + pagination together in one card */
-.table-card {
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  overflow: hidden;
-}
-
-/* Inner scroll area — no border/shadow now (moved to .table-card) */
-.table-wrapper {
-  overflow-x: auto;
-}
-/* ============================================================
-   PAGINATION
+   6. PAGINATION
    ============================================================ */
 .pagination {
   display: flex;
@@ -326,17 +299,17 @@
   gap: 1rem;
   flex-wrap: wrap;
   padding: 0.9rem 1.25rem;
-  border-top: 1px solid #f3f4f6;
-  background: #fafbff;
+  border-top: 1px solid var(--border-base);
+  background: var(--bg-input);
 }
 
 .pagination-info {
   font-size: 0.83rem;
-  color: #6b7280;
+  color: var(--text-secondary);
 }
 
 .pagination-info strong {
-  color: #111827;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -352,16 +325,16 @@
   align-items: center;
   gap: 0.4rem;
   font-size: 0.8rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 
 .page-size select {
   padding: 0.32rem 0.5rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-base);
   border-radius: 6px;
-  background: #fff;
-  color: #111827;
+  background: var(--bg-card);
+  color: var(--text-primary);
   font-size: 0.8rem;
   font-family: inherit;
   cursor: pointer;
@@ -369,12 +342,12 @@
 }
 
 .page-size select:hover {
-  border-color: #c7d2fe;
+  border-color: var(--brand-200);
 }
 
 .page-size select:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: var(--border-focus);
   box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.12);
 }
 
@@ -391,10 +364,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-base);
   border-radius: 8px;
-  background: #fff;
-  color: #374151;
+  background: var(--bg-card);
+  color: var(--text-secondary);
   font-size: 0.8rem;
   font-weight: 600;
   font-family: inherit;
@@ -410,9 +383,9 @@
 }
 
 .pagination-btn:hover:not(:disabled):not(.active) {
-  border-color: #c7d2fe;
-  background: #eef2ff;
-  color: #4f46e5;
+  border-color: var(--brand-200);
+  background: var(--brand-50);
+  color: var(--brand-600);
 }
 
 .pagination-btn:disabled {
@@ -421,21 +394,32 @@
 }
 
 .pagination-btn.active {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: var(--btn-primary-bg);
   border-color: transparent;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.28);
+  color: var(--btn-primary-text);
+  box-shadow: 0 4px 12px var(--btn-primary-shadow);
 }
 
 .pagination-ellipsis {
-  color: #9ca3af;
+  color: var(--text-secondary);
   padding: 0 0.35rem;
   font-size: 0.85rem;
   user-select: none;
 }
 
-/* Responsive */
+/* ============================================================
+   7. RESPONSIVE
+   ============================================================ */
 @media (max-width: 640px) {
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .list-title {
+    font-size: 1.2rem;
+  }
+
   .pagination {
     flex-direction: column;
     align-items: stretch;

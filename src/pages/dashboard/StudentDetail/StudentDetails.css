@@ -1,4 +1,5 @@
-/* StudentDetails.css */
+
+
 .student-details-page {
   padding: 0;
 }
@@ -15,23 +16,24 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1.2rem;
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
+  background: var(--neutral-100);
+  border: 1px solid var(--border-base);
   border-radius: 8px;
-  color: #374151;
+  color: var(--text-secondary);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .back-btn:hover {
-  background: #e5e7eb;
+  background: var(--neutral-200);
+  color: var(--text-primary);
 }
 
 .details-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -40,11 +42,11 @@
   display: flex;
   align-items: center;
   gap: 2rem;
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-base);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
@@ -52,14 +54,14 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 3px solid #6366f1;
+  border: 3px solid var(--brand-500);
 }
 
 .profile-info h2 {
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0 0 0.3rem 0;
-  color: #111827;
+  color: var(--text-primary);
 }
 
 .profile-tags {
@@ -70,8 +72,8 @@
 }
 
 .tag {
-  background: #eef2ff;
-  color: #4f46e5;
+  background: var(--brand-50);
+  color: var(--brand-600);
   padding: 0.15rem 0.8rem;
   border-radius: 12px;
   font-size: 0.8rem;
@@ -80,8 +82,50 @@
 
 .profile-dob {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin: 0;
+}
+
+/* Profile card action button */
+.profile-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.fees-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px var(--btn-primary-shadow);
+  font-family: inherit;
+}
+
+.fees-btn:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-1px);
+}
+
+.fees-btn:active {
+  transform: scale(0.98);
+}
+
+.fees-btn > svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  flex-shrink: 0;
 }
 
 /* Details Grid */
@@ -92,10 +136,10 @@
 }
 
 .detail-card {
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-base);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
@@ -109,202 +153,27 @@
   gap: 0.6rem;
   font-size: 1.05rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0 0 1rem 0;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid var(--border-base);
   padding-bottom: 0.5rem;
 }
 
 .detail-item {
   font-size: 0.95rem;
   padding: 0.3rem 0;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .detail-item strong {
   font-weight: 600;
-  color: #374151;
+  color: var(--text-secondary);
   margin-right: 0.5rem;
 }
 
-/* Fee */
-.fee-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.95rem;
-  padding: 0.2rem 0;
-}
-
-.fee-progress {
-  width: 100%;
-  height: 8px;
-  background: #f3f4f6;
-  border-radius: 4px;
-  margin: 0.6rem 0;
-  overflow: hidden;
-}
-
-.fee-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
-  border-radius: 4px;
-  transition: width 0.6s ease;
-}
-
-.fee-last {
-  font-size: 0.85rem;
-  color: #6b7280;
-  margin-top: 0.3rem;
-}
-
-/* Attendance */
-.attendance-stats {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.8rem;
-}
-
-.attendance-item {
-  text-align: center;
-}
-
-.attendance-label {
-  display: block;
-  font-size: 0.75rem;
-  color: #6b7280;
-}
-
-.attendance-value {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #111827;
-}
-
-.attendance-percentage {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.percentage-value {
-  font-size: 1.2rem;
-}
-
-/* Results */
-.results-table-wrapper {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.exam-block {
-  flex: 1;
-  min-width: 200px;
-}
-
-.exam-block h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #111827;
-  margin: 0 0 0.5rem 0;
-}
-
-.results-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.95rem;
-}
-
-.results-table th {
-  text-align: left;
-  font-weight: 600;
-  color: #374151;
-  padding: 0.3rem 0.5rem;
-  border-bottom: 1px solid #f3f4f6;
-}
-
-.results-table td {
-  padding: 0.3rem 0.5rem;
-  color: #1f2937;
-}
-/* Add to StudentDetails.css */
-
-/* Fee card full width */
-.detail-card.full-width {
-  grid-column: 1 / -1;
-}
-
-/* Add payment form */
-.add-payment-form {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  border-top: 1px solid #f3f4f6;
-  padding-top: 1rem;
-}
-
-.payment-input {
-  flex: 1;
-  padding: 0.5rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  background: #f9fafb;
-}
-
-.payment-input:focus {
-  outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-}
-
-.payment-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.5rem 1.5rem;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.payment-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-/* Fee header styles (already exist, but ensure they're consistent) */
-.fee-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-/* Results table with enhanced columns */
-.results-table th:not(:first-child),
-.results-table td:not(:first-child) {
-  text-align: center;
-}
-
-.results-table tfoot th {
-  border-top: 2px solid #6366f1;
-  padding-top: 0.5rem;
-}
-
-.results-table tfoot td {
-  border-top: 2px solid #6366f1;
-  padding-top: 0.5rem;
-  font-weight: 700;
-  color: #1f2937;
-}
-/* Additional styles for StudentDetails.css */
-
-/* Fee header with year selector */
+/* ============================================================
+   Fees Section
+   ============================================================ */
 .fee-header {
   display: flex;
   justify-content: space-between;
@@ -318,26 +187,27 @@
 
 .fee-year-select {
   padding: 0.3rem 0.6rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-base);
   border-radius: 6px;
   font-size: 0.85rem;
-  background: #f9fafb;
+  background: var(--bg-input);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
 .fee-year-select:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: var(--border-focus);
 }
 
 .fee-class {
   font-size: 0.9rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
 }
 
 .fee-breakdown {
-  border-top: 1px solid #f3f4f6;
+  border-top: 1px solid var(--border-base);
   padding-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -346,15 +216,129 @@
   padding: 0.2rem 0;
 }
 
+.fee-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  padding: 0.2rem 0;
+  color: var(--text-primary);
+}
+
 .fee-total {
   font-weight: 700;
   font-size: 1.05rem;
   padding: 0.3rem 0;
-  border-bottom: 2px solid #e5e7eb;
+  border-bottom: 2px solid var(--border-base);
   margin-bottom: 0.3rem;
+  color: var(--text-primary);
 }
 
-/* Results header with filters */
+.fee-progress {
+  width: 100%;
+  height: 8px;
+  background: var(--neutral-100);
+  border-radius: 4px;
+  margin: 0.6rem 0;
+  overflow: hidden;
+}
+
+.fee-progress-bar {
+  height: 100%;
+  background: var(--btn-primary-bg);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.fee-last {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+}
+
+/* Add payment form */
+.add-payment-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--border-base);
+  padding-top: 1rem;
+}
+
+.payment-input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-base);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+
+.payment-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.payment-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 1.5rem;
+  background: var(--btn-success-bg);
+  color: var(--btn-success-text);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.payment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* ============================================================
+   Attendance Section
+   ============================================================ */
+.attendance-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.attendance-item {
+  text-align: center;
+}
+
+.attendance-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.attendance-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.attendance-percentage {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.percentage-value {
+  font-size: 1.2rem;
+}
+
+/* ============================================================
+   Results Section
+   ============================================================ */
 .results-header {
   display: flex;
   justify-content: space-between;
@@ -371,31 +355,23 @@
 
 .result-filter-select {
   padding: 0.3rem 0.8rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-base);
   border-radius: 6px;
   font-size: 0.85rem;
-  background: #f9fafb;
+  background: var(--bg-input);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
 .result-filter-select:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: var(--border-focus);
 }
 
 .result-filter-select:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
-
-.no-data {
-  color: #9ca3af;
-  text-align: center;
-  padding: 1rem 0;
-}
-/* =========================
-   Results List
-   ========================= */
 
 .results-list {
   display: flex;
@@ -404,42 +380,24 @@
   margin-top: 16px;
 }
 
-
-/* =========================
-   Exam Item
-   ========================= */
-
 .result-exam-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 16px 18px;
-
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-input);
+  border: 1px solid var(--border-base);
   border-radius: 10px;
-
   cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .result-exam-item:hover {
-  background: #ffffff;
-  border-color: #6366f1;
+  background: var(--bg-card);
+  border-color: var(--brand-500);
   transform: translateY(-1px);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
 }
-
-
-/* =========================
-   Exam Information
-   ========================= */
 
 .result-exam-info {
   display: flex;
@@ -449,72 +407,121 @@
 
 .result-exam-info h4 {
   margin: 0;
-
   font-size: 15px;
   font-weight: 600;
-
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .result-exam-info span {
   font-size: 13px;
-  color: #6b7280;
+  color: var(--text-secondary);
 }
-
-
-/* =========================
-   Arrow
-   ========================= */
 
 .result-exam-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 32px;
   height: 32px;
-
   border-radius: 50%;
-
-  background: #eef2ff;
-  color: #6366f1;
-
+  background: var(--brand-50);
+  color: var(--brand-600);
   font-size: 18px;
   font-weight: 600;
-
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .result-exam-item:hover .result-exam-arrow {
-  background: #6366f1;
-  color: white;
+  background: var(--brand-500);
+  color: var(--text-inverse);
   transform: translateX(3px);
 }
 
+/* Results Table (if used) */
+.results-table-wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
 
-/* =========================
-   No Data
-   ========================= */
+.exam-block {
+  flex: 1;
+  min-width: 200px;
+}
+
+.exam-block h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.results-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid var(--border-base);
+}
+
+.results-table td {
+  padding: 0.3rem 0.5rem;
+  color: var(--text-primary);
+}
+
+.results-table th:not(:first-child),
+.results-table td:not(:first-child) {
+  text-align: center;
+}
+
+.results-table tfoot th {
+  border-top: 2px solid var(--brand-500);
+  padding-top: 0.5rem;
+}
+
+.results-table tfoot td {
+  border-top: 2px solid var(--brand-500);
+  padding-top: 0.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* No Data State */
+.no-data {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 1rem 0;
+}
 
 .results-list .no-data {
   margin: 0;
   padding: 24px;
-
   text-align: center;
-
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 14px;
-
-  background: #f9fafb;
+  background: var(--bg-input);
   border-radius: 10px;
 }
 
+/* Responsive */
+@media (max-width: 640px) {
+  .profile-actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: stretch;
+  }
 
-/* =========================
-   Mobile
-   ========================= */
+  .fees-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
 
 @media (max-width: 600px) {
   .result-exam-item {
@@ -533,59 +540,5 @@
     width: 30px;
     height: 30px;
     font-size: 16px;
-  }
-}
-/* Profile card action button */
-.profile-actions {
-  margin-left: auto;
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.fees-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.4rem;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
-  font-family: inherit;
-}
-
-.fees-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 22px rgba(99, 102, 241, 0.35);
-}
-
-.fees-btn:active {
-  transform: scale(0.98);
-}
-
-.fees-btn > svg {
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
-  flex-shrink: 0;
-}
-
-@media (max-width: 640px) {
-  .profile-actions {
-    margin-left: 0;
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  .fees-btn {
-    flex: 1;
-    justify-content: center;
   }
 }

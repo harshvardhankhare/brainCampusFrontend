@@ -8,6 +8,8 @@ import {
   CheckCircle2
 } from "lucide-react";
 import "./Settings.css";
+// Import the utility we created earlier to generate the 7 shades of the brand color
+import { generateShades } from "../../../utils/themeUtils"; // Adjust this path if necessary
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("appearance");
@@ -17,6 +19,11 @@ const Settings = () => {
   // --- Theme State ---
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("app-theme") || "light";
+  });
+
+  // --- Brand Color State ---
+  const [brandColor, setBrandColor] = useState(() => {
+    return localStorage.getItem("brand-color") || "#6366f1";
   });
 
   // --- School Details State (Mock data) ---
@@ -41,15 +48,26 @@ const Settings = () => {
     weeklyReports: true
   });
 
-  // Apply theme to document root
+  // 1. Apply Light/Dark Theme
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("app-theme", theme);
   }, [theme]);
 
-  const handleSave = (section) => {
+  // 2. Apply Custom Brand Color
+  useEffect(() => {
+    localStorage.setItem("brand-color", brandColor);
+    
+    // Generate the 7 shades and apply them to the CSS variables
+    const shades = generateShades(brandColor);
+    Object.entries(shades).forEach(([key, value]) => {
+      document.documentElement.style.setProperty(key, value);
+    });
+  }, [brandColor]);
+
+  const handleSave = (section: string) => {
     setSaving(true);
-    // Simulate API call
+    // Simulate API call to save backend settings
     setTimeout(() => {
       setSaving(false);
       setSavedMessage(`${section} settings saved successfully!`);
@@ -115,9 +133,10 @@ const Settings = () => {
                 <p>Customize the look and feel of your dashboard.</p>
               </div>
               
+              {/* Theme Selector */}
               <div className="setting-group">
-                <label>Theme</label>
-                <p className="setting-desc">Select your preferred color theme.</p>
+                <label>Theme Mode</label>
+                <p className="setting-desc">Select your preferred base color scheme.</p>
                 <div className="theme-grid">
                   <div 
                     className={`theme-card ${theme === 'light' ? 'active' : ''}`}
@@ -132,6 +151,37 @@ const Settings = () => {
                   >
                     <div className="theme-preview dark-preview"></div>
                     <span>Dark</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dynamic Brand Color Selector */}
+              <div className="setting-group" style={{ marginTop: '2rem', paddingTop: '2rem', borderTop: '1px solid var(--border-base)' }}>
+                <label>Brand Color</label>
+                <p className="setting-desc">Pick a color to instantly theme the entire application.</p>
+                
+                <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem" }}>
+                  <input 
+                    type="color" 
+                    value={brandColor} 
+                    onChange={(e) => setBrandColor(e.target.value)}
+                    style={{ 
+                      width: "60px", 
+                      height: "60px", 
+                      padding: "0", 
+                      border: "none", 
+                      borderRadius: "12px", 
+                      cursor: "pointer",
+                      background: "transparent"
+                    }}
+                  />
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <span style={{ fontFamily: "monospace", fontSize: "1.1rem", fontWeight: "bold", color: "var(--text-primary)" }}>
+                      {brandColor.toUpperCase()}
+                    </span>
+                    <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+                      This updates buttons, links, and highlights.
+                    </span>
                   </div>
                 </div>
               </div>

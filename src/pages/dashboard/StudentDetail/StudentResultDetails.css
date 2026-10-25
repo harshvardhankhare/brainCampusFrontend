@@ -8,7 +8,6 @@
   box-sizing: border-box;
 }
 
-
 /* =========================
    Header
    ========================= */
@@ -24,15 +23,14 @@
   margin: 0;
   font-size: 28px;
   font-weight: 700;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .result-details-subtitle {
   margin: 5px 0 0;
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 14px;
 }
-
 
 /* =========================
    Back Button
@@ -43,8 +41,8 @@
   align-items: center;
   gap: 8px;
   border: none;
-  background: #6366f1;
-  color: white;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
   padding: 10px 16px;
   border-radius: 8px;
   font-size: 14px;
@@ -54,10 +52,9 @@
 }
 
 .back-btn:hover {
-  opacity: 0.9;
+  background: var(--btn-primary-hover);
   transform: translateY(-1px);
 }
-
 
 /* =========================
    Student Information
@@ -67,19 +64,20 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  background: white;
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .result-student-avatar {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: #6366f1;
-  color: white;
+  background: var(--brand-500);
+  color: var(--text-inverse);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,21 +89,20 @@
 .result-student-info h2 {
   margin: 0 0 12px;
   font-size: 22px;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .result-student-details {
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
 .result-student-details strong {
-  color: #374151;
+  color: var(--text-primary);
 }
-
 
 /* =========================
    Exam Information
@@ -115,19 +112,20 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: white;
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
   border-radius: 12px;
   padding: 20px 24px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .result-exam-icon {
   width: 48px;
   height: 48px;
   border-radius: 10px;
-  background: #eef2ff;
-  color: #6366f1;
+  background: var(--brand-50);
+  color: var(--brand-600);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,32 +135,32 @@
 .result-exam-label {
   display: block;
   font-size: 13px;
-  color: #6b7280;
+  color: var(--text-secondary);
   margin-bottom: 4px;
 }
 
 .result-exam-card h2 {
   margin: 0;
   font-size: 20px;
-  color: #1f2937;
+  color: var(--text-primary);
 }
-
 
 /* =========================
    Result Card
    ========================= */
 
 .result-report-card {
-  background: white;
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
   border-radius: 12px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   overflow: hidden;
 }
 
 .result-card-header {
   padding: 20px 24px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-base);
 }
 
 .result-card-header h3 {
@@ -171,9 +169,8 @@
   gap: 10px;
   margin: 0;
   font-size: 18px;
-  color: #1f2937;
+  color: var(--text-primary);
 }
-
 
 /* =========================
    Result Table
@@ -191,20 +188,20 @@
 }
 
 .result-table th {
-  background: #f9fafb;
-  color: #4b5563;
+  background: var(--bg-input);
+  color: var(--text-secondary);
   font-size: 13px;
   font-weight: 600;
   text-align: left;
   padding: 14px 18px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border-base);
   white-space: nowrap;
 }
 
 .result-table td {
   padding: 16px 18px;
-  border-bottom: 1px solid #f0f0f0;
-  color: #374151;
+  border-bottom: 1px solid var(--border-base);
+  color: var(--text-primary);
   font-size: 14px;
 }
 
@@ -213,9 +210,8 @@
 }
 
 .result-table tbody tr:hover {
-  background: #fafafa;
+  background: var(--bg-input);
 }
-
 
 /* =========================
    Subject
@@ -228,15 +224,14 @@
 }
 
 .subject-info strong {
-  color: #1f2937;
+  color: var(--text-primary);
   font-size: 14px;
 }
 
 .subject-info small {
-  color: #9ca3af;
+  color: var(--text-secondary);
   font-size: 12px;
 }
-
 
 /* =========================
    Grade
@@ -249,12 +244,11 @@
   min-width: 36px;
   padding: 5px 9px;
   border-radius: 6px;
-  background: #eef2ff;
-  color: #4f46e5;
+  background: var(--brand-50);
+  color: var(--brand-600);
   font-weight: 700;
   font-size: 13px;
 }
-
 
 /* =========================
    Pass / Fail
@@ -270,13 +264,12 @@
 }
 
 .result-pass {
-  color: #16a34a;
+  color: var(--btn-success-bg);
 }
 
 .result-fail {
-  color: #dc2626;
+  color: var(--btn-danger-text);
 }
-
 
 /* =========================
    No Result Data
@@ -285,26 +278,26 @@
 .no-result-data {
   text-align: center !important;
   padding: 40px !important;
-  color: #9ca3af !important;
+  color: var(--text-secondary) !important;
 }
-
 
 /* =========================
    Overall Result
    ========================= */
 
 .overall-result-card {
-  background: white;
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
 .overall-result-card h3 {
   margin: 0 0 20px;
   font-size: 18px;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .overall-result-grid {
@@ -314,7 +307,7 @@
 }
 
 .overall-result-item {
-  background: #f9fafb;
+  background: var(--bg-input);
   border-radius: 10px;
   padding: 18px;
   display: flex;
@@ -324,22 +317,21 @@
 
 .overall-result-item span {
   font-size: 13px;
-  color: #6b7280;
+  color: var(--text-secondary);
 }
 
 .overall-result-item strong {
   font-size: 20px;
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .overall-pass {
-  color: #16a34a !important;
+  color: var(--btn-success-bg) !important;
 }
 
 .overall-fail {
-  color: #dc2626 !important;
+  color: var(--btn-danger-text) !important;
 }
-
 
 /* =========================
    Loading
@@ -350,10 +342,9 @@
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 16px;
 }
-
 
 /* =========================
    Not Found
@@ -370,14 +361,9 @@
 
 .not-found-container h2 {
   margin: 0;
-  color: #374151;
+  color: var(--text-primary);
   font-size: 20px;
 }
-
-
-/* =========================
-   Responsive
-   ========================= */
 
 @media (max-width: 900px) {
   .overall-result-grid {
@@ -388,7 +374,6 @@
     gap: 10px 16px;
   }
 }
-
 
 @media (max-width: 600px) {
   .student-result-details-page {
