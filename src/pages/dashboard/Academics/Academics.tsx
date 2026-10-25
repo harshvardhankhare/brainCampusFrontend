@@ -8,13 +8,8 @@ import {
   FaEye,
   FaTimes,
 } from "react-icons/fa";
-
 import api from "../../../api/axios";
 import "./Academics.css";
-
-// =========================
-// TypeScript Interfaces
-// =========================
 interface AcademicYear {
   id: number;
   name: string;
@@ -70,9 +65,6 @@ interface GroupedClass {
 }
 
 const Academics: React.FC = () => {
-  // =========================
-  // State
-  // =========================
   const [academicYears, setAcademicYears] = useState<AcademicYear[]>([]);
   const [selectedYear, setSelectedYear] = useState<string>("");
 
@@ -83,13 +75,9 @@ const Academics: React.FC = () => {
   const [exams, setExams] = useState<Exam[]>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
-
-  // Modal States
   const [showAddClassModal, setShowAddClassModal] = useState<boolean>(false);
   const [showAddSubjectModal, setShowAddSubjectModal] = useState<boolean>(false);
   const [submittingModal, setSubmittingModal] = useState<boolean>(false);
-
-  // Forms
   const [classForm, setClassForm] = useState({
     name: "",
     section: "",
@@ -99,10 +87,6 @@ const Academics: React.FC = () => {
     name: "",
     code: "",
   });
-
-  // =========================
-  // 1. Initial Load: Academic Years
-  // =========================
   useEffect(() => {
     const fetchYears = async () => {
       try {
@@ -111,7 +95,6 @@ const Academics: React.FC = () => {
         setAcademicYears(yearsList);
 
         if (yearsList.length > 0) {
-          // Select active year or fallback to first
           const activeYear = yearsList.find((y) => y.active) || yearsList[0];
           setSelectedYear(activeYear.name);
         }
@@ -122,10 +105,6 @@ const Academics: React.FC = () => {
 
     fetchYears();
   }, []);
-
-  // =========================
-  // 2. Fetch Academics Data
-  // =========================
   const fetchAcademicsData = async () => {
     try {
       setLoading(true);
@@ -159,19 +138,11 @@ const Academics: React.FC = () => {
   useEffect(() => {
     fetchAcademicsData();
   }, []);
-
-  // =========================
-  // 3. Computed / Filtered Data
-  // =========================
-
-  // Filter classes by selected academic year
   const filteredClasses = useMemo(() => {
     return classes.filter(
       (c) => !selectedYear || c.academicYear === selectedYear
     );
   }, [classes, selectedYear]);
-
-  // Group classes by class name, aggregate sections and assigned subjects
   const groupedClasses = useMemo<GroupedClass[]>(() => {
     const map = new Map<string, { sections: Set<string>; subjects: Set<string> }>();
 
@@ -181,8 +152,6 @@ const Academics: React.FC = () => {
       }
       map.get(cls.name)?.sections.add(cls.section);
     });
-
-    // Find subjects taught in these classes for this year
     classSubjects
       .filter((cs) => !selectedYear || cs.academicYear === selectedYear)
       .forEach((cs) => {
@@ -197,15 +166,11 @@ const Academics: React.FC = () => {
       subjects: Array.from(data.subjects).sort(),
     }));
   }, [filteredClasses, classSubjects, selectedYear]);
-
-  // Filter exams for selected academic year
   const upcomingExams = useMemo(() => {
     return exams
       .filter((exam) => !selectedYear || exam.academicYear === selectedYear)
       .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
   }, [exams, selectedYear]);
-
-  // Dynamic Statistics
   const stats = useMemo(() => [
     {
       label: "Total Classes",
@@ -232,15 +197,9 @@ const Academics: React.FC = () => {
       color: "#10b981",
     },
   ], [filteredClasses.length, subjects.length, teachers.length, upcomingExams.length]);
-
-  // =========================
-  // Handlers
-  // =========================
   const handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedYear(e.target.value);
   };
-
-  // Add Class Submission
   const handleAddClassSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -260,8 +219,6 @@ const Academics: React.FC = () => {
       alert(`Class ${classForm.name} (${classForm.section}) created successfully!`);
       setShowAddClassModal(false);
       setClassForm({ name: "", section: "" });
-
-      // Refresh list
       const res = await api.get("/classes");
       setClasses(res.data.data || []);
     } catch (err: any) {
@@ -271,8 +228,6 @@ const Academics: React.FC = () => {
       setSubmittingModal(false);
     }
   };
-
-  // Add Subject Submission
   const handleAddSubjectSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -286,8 +241,6 @@ const Academics: React.FC = () => {
       alert(`Subject "${subjectForm.name}" created successfully!`);
       setShowAddSubjectModal(false);
       setSubjectForm({ name: "", code: "" });
-
-      // Refresh list
       const res = await api.get("/subjects");
       setSubjects(res.data.data || []);
     } catch (err: any) {
@@ -421,8 +374,6 @@ const Academics: React.FC = () => {
             )}
           </div>
         </div>
-
-        {/* Upcoming Exams */}
         <div className="exam-list-wrapper">
           <div className="section-header">
             <h2>Upcoming Exams ({selectedYear})</h2>
@@ -459,10 +410,6 @@ const Academics: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* ============================================================ */}
-      {/* Add Class Modal                                              */}
-      {/* ============================================================ */}
       {showAddClassModal && (
         <div
           className="modal-overlay"
@@ -532,10 +479,6 @@ const Academics: React.FC = () => {
           </div>
         </div>
       )}
-
-      {/* ============================================================ */}
-      {/* Add Subject Modal                                            */}
-      {/* ============================================================ */}
       {showAddSubjectModal && (
         <div
           className="modal-overlay"

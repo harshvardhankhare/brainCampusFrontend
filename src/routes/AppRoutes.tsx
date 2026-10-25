@@ -19,6 +19,9 @@ import TeacherDetails from "../pages/dashboard/teachers/TeacherDetails"
 import StudentFees from '../pages/dashboard/StudentDetail/StudentFees';
 import ApiDashboard from '../pages/dashboard/ApiDashboard/ApiDashboard';
 import AuditLogViewer from '../pages/dashboard/ApiDashboard/AuditLogViewer';
+import AddFee from '../pages/dashboard/Fees/AddFee';
+import FeeTypes from '../pages/dashboard/Fees/FeeTypes';
+import Settings from '../pages/dashboard/settings/Settings';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -43,6 +46,7 @@ const AppRoutes = () => {
         <Route index element={<DashboardHome />} />
         <Route path="students" element={<Students />} />
         <Route path="teachers" element={<Teachers />} />
+        <Route path="settings" element={<Settings />} />
         <Route path="finance" element={<Finance />} />
         <Route path='academics' element={<Academics/>}/>
         <Route path='students/list' element={<StudentList/>}/>
@@ -56,6 +60,8 @@ const AppRoutes = () => {
         <Route path="roles" element = {<Roles/>}/>
         <Route path="api-dashboard" element={<ApiDashboard/>}/>
         <Route path="api-dashboard/logs" element={<AuditLogViewer/>}/>
+        <Route path="students/fees/add" element={<AddFee />} />
+        <Route path="settings/fee-types" element={<FeeTypes />} />
       </Route>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="*" element={<NotFound/>} />

@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { Users, Shield, Settings, BarChart,Terminal  } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { Users, Shield, Settings, BarChart, Terminal, Building } from 'lucide-react';
 import styles from './AdminOptions.module.css';
 
 const AdminOptions = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+  const isSuperAdmin = user?.role === 'SUPER_ADMIN';
 
   const adminCards = [
     {
@@ -20,7 +23,7 @@ const AdminOptions = () => {
       description: 'Configure user roles and access permissions.',
       icon: Shield,
       color: '#7c3aed',
-      path: '/dashboard/roles', // not implemented yet
+      path: '/dashboard/roles',
     },
     {
       id: 'settings',
@@ -28,7 +31,7 @@ const AdminOptions = () => {
       description: 'Configure school details, academic years, and more.',
       icon: Settings,
       color: '#0ea5e9',
-      path: '/dashboard/settings', // not implemented yet
+      path: '/dashboard/settings',
     },
     {
       id: 'reports',
@@ -36,16 +39,28 @@ const AdminOptions = () => {
       description: 'View audit logs, user activity, and administrative reports.',
       icon: BarChart,
       color: '#f59e0b',
-      path: '/dashboard/reports', // not implemented yet
+      path: '/dashboard/reports',
     },
-  {
-  id: 'api-dashboard',
-  title: 'Admin API Dashboard',
-  description: 'View audit logs, user activity, and API logs.',
-  icon: Terminal,
-  color: '#10b981',
-  path: '/dashboard/api-dashboard',
-},
+    {
+      id: 'api-dashboard',
+      title: 'Admin API Dashboard',
+      description: 'View audit logs, user activity, and API logs.',
+      icon: Terminal,
+      color: '#10b981',
+      path: '/dashboard/api-dashboard',
+    },
+    ...(isSuperAdmin
+      ? [
+          {
+            id: 'tenants',
+            title: 'Tenant Management',
+            description: 'Provision new schools, manage tenants, and add users.',
+            icon: Building,
+            color: '#ef4444',
+            path: '/dashboard/tenants',
+          },
+        ]
+      : []),
   ];
 
   return (
