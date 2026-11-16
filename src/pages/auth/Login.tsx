@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
+import { setInitialized, setUser } from "../../redux/authSlice";
 import styles from "./Login.module.css";
-
-// Assets (you can replace these with your own)
-//import logoIcon from "../../assets/school-logo.svg"; // optional
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +31,9 @@ const Login = () => {
       const data = response.data.data;
 
       localStorage.setItem("token", data.accessToken);
+      const user = data.user ?? (await api.get("/auth/me")).data.data;
+      dispatch(setUser(user));
+      dispatch(setInitialized(true));
 
       navigate("/dashboard");
     } catch (error: any) {
