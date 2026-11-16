@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import {
   FaShieldAlt,
   FaSearch,
@@ -7,6 +7,8 @@ import {
   FaSave,
   FaUserShield,
   FaInfoCircle,
+  FaPlus,
+  FaTimes,
 } from "react-icons/fa";
 
 import api from "../../api/axios";
@@ -33,6 +35,12 @@ const Roles: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [saving, setSaving] = useState<boolean>(false);
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [creatingPermission, setCreatingPermission] = useState(false);
+  const [permissionName, setPermissionName] = useState("");
+  const [permissionDescription, setPermissionDescription] = useState("");
+  const [createError, setCreateError] = useState("");
+  const creatingPermissionRef = useRef(false);
   const [statusMessage, setStatusMessage] = useState<{
     type: "success" | "error" | "info";
     text: string;
@@ -82,8 +90,6 @@ const Roles: React.FC = () => {
     return roles.find((r) => r.roleId === selectedRoleId) || null;
   }, [roles, selectedRoleId]);
 
-  const isAdminRole = currentRole?.role === "ADMIN";
-
   const handleRoleChange = (roleId: number) => {
     setSelectedRoleId(roleId);
     setStatusMessage(null);
@@ -105,7 +111,6 @@ const Roles: React.FC = () => {
   }, [allPermissions, searchTerm]);
 
   const togglePermission = (name: string) => {
-    if (isAdminRole) return;
     setSelectedPermissions((prev) => {
       const next = new Set(prev);
       if (next.has(name)) next.delete(name);
@@ -115,7 +120,6 @@ const Roles: React.FC = () => {
   };
 
   const handleSelectAllFiltered = () => {
-    if (isAdminRole) return;
     setSelectedPermissions((prev) => {
       const next = new Set(prev);
       filteredPermissions.forEach((p) => next.add(p.name));
@@ -124,7 +128,6 @@ const Roles: React.FC = () => {
   };
 
   const handleDeselectAllFiltered = () => {
-    if (isAdminRole) return;
     setSelectedPermissions((prev) => {
       const next = new Set(prev);
       filteredPermissions.forEach((p) => next.delete(p.name));
@@ -135,10 +138,6 @@ const Roles: React.FC = () => {
   const handleSavePermissions = async () => {
     if (!selectedRoleId) {
       alert("Please select a role first.");
-      return;
-    }
-    if (isAdminRole) {
-      alert("ADMIN role permissions cannot be modified.");
       return;
     }
     if (selectedPermissions.size === 0) {
@@ -181,6 +180,46 @@ const Roles: React.FC = () => {
     }
   };
 
+  const handleCreatePermission = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (creatingPermissionRef.current) return;
+
+    const name = permissionName.trim();
+    const description = permissionDescription.trim();
+    if (!name || !description) {
+      setCreateError("Enter both a permission name and description.");
+      return;
+    }
+    if (allPermissions.some((permission) => permission.name.toLowerCase() === name.toLowerCase())) {
+      setCreateError("A permission with this name already exists.");
+      return;
+    }
+
+    try {
+      creatingPermissionRef.current = true;
+      setCreatingPermission(true);
+      setCreateError("");
+      await api.post("/management/roles/permissions", { name, description });
+      const permissionsResponse = await api.get("/management/roles/permissions");
+      setAllPermissions(permissionsResponse.data.data || []);
+      setPermissionName("");
+      setPermissionDescription("");
+      setCreateModalOpen(false);
+      setStatusMessage({ type: "success", text: "Permission created successfully." });
+    } catch (err: any) {
+      console.error("Failed to create permission:", err);
+      setCreateError(
+        err.response?.data?.message ||
+          (err.response?.status === 403
+            ? "You are not authorized to manage permissions."
+            : "Failed to create permission. Please try again.")
+      );
+    } finally {
+      creatingPermissionRef.current = false;
+      setCreatingPermission(false);
+    }
+  };
+
   return (
     <div className="roles-page">
       {/* Header */}
@@ -195,9 +234,19 @@ const Roles: React.FC = () => {
         </div>
         <div className="header-actions">
           <button
+            className="add-permission-btn"
+            type="button"
+            onClick={() => {
+              setCreateError("");
+              setCreateModalOpen(true);
+            }}
+          >
+            <FaPlus /> Add New Permission
+          </button>
+          <button
             className="give-permissions-btn"
             onClick={handleSavePermissions}
-            disabled={saving || isAdminRole || !selectedRoleId}
+            disabled={saving || !selectedRoleId}
           >
             <FaSave /> {saving ? "Saving Permissions..." : "Give Permissions"}
           </button>
@@ -210,10 +259,36 @@ const Roles: React.FC = () => {
         </div>
       )}
 
-      {isAdminRole && (
-        <div className="status-banner info">
-          <FaInfoCircle /> <strong>ADMIN</strong> role has full administrative
-          access to all features by default and cannot be modified.
+      {createModalOpen && (
+        <div className="permission-modal-backdrop" onMouseDown={(event) => {
+          if (event.target === event.currentTarget && !creatingPermission) setCreateModalOpen(false);
+        }}>
+          <section className="permission-modal" role="dialog" aria-modal="true" aria-labelledby="create-permission-title">
+            <div className="permission-modal-header">
+              <div>
+                <h2 id="create-permission-title">Add New Permission</h2>
+                <p>Create a permission available for role assignment.</p>
+              </div>
+              <button className="modal-close-btn" type="button" aria-label="Close" disabled={creatingPermission} onClick={() => setCreateModalOpen(false)}><FaTimes /></button>
+            </div>
+            <form onSubmit={handleCreatePermission}>
+              <label className="permission-field">
+                Permission name
+                <input autoFocus value={permissionName} onChange={(event) => setPermissionName(event.target.value)} maxLength={100} placeholder="e.g. VIEW_REPORTS" disabled={creatingPermission} />
+              </label>
+              <label className="permission-field">
+                Description
+                <textarea value={permissionDescription} onChange={(event) => setPermissionDescription(event.target.value)} rows={4} maxLength={500} placeholder="Describe what this permission allows." disabled={creatingPermission} />
+              </label>
+              {createError && <p className="permission-form-error" role="alert">{createError}</p>}
+              <div className="permission-modal-actions">
+                <button className="modal-cancel-btn" type="button" disabled={creatingPermission} onClick={() => setCreateModalOpen(false)}>Cancel</button>
+                <button className="add-permission-btn" type="submit" disabled={creatingPermission}>
+                  {creatingPermission ? "Creating..." : "Create Permission"}
+                </button>
+              </div>
+            </form>
+          </section>
         </div>
       )}
 
@@ -277,7 +352,6 @@ const Roles: React.FC = () => {
                 type="button"
                 className="tool-btn"
                 onClick={handleSelectAllFiltered}
-                disabled={isAdminRole}
               >
                 Select All
               </button>
@@ -285,7 +359,6 @@ const Roles: React.FC = () => {
                 type="button"
                 className="tool-btn"
                 onClick={handleDeselectAllFiltered}
-                disabled={isAdminRole}
               >
                 Deselect All
               </button>
@@ -313,7 +386,7 @@ const Roles: React.FC = () => {
                       key={perm.name}
                       className={`perm-checkbox-item ${
                         isChecked ? "checked" : ""
-                      } ${isAdminRole ? "disabled" : ""}`}
+                      }`}
                       onClick={() => togglePermission(perm.name)}
                     >
                       <span className="check-icon">
