@@ -53,6 +53,59 @@
   transition: background 0.2s ease, transform 0.1s ease;
 }
 
+.header-actions { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+
+.add-permission-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: 0;
+  border-radius: 8px;
+  padding: 0.75rem 1.1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.add-permission-btn:hover:not(:disabled) { background: var(--btn-primary-hover); }
+.add-permission-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.permission-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.55);
+}
+.permission-modal {
+  width: min(100%, 520px);
+  padding: 1.5rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-base);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+.permission-modal-header { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
+.permission-modal-header h2 { margin: 0; font-size: 1.25rem; }
+.permission-modal-header p { margin: 0.35rem 0 0; color: var(--text-secondary); font-size: 0.9rem; }
+.modal-close-btn { align-self: flex-start; padding: 0.4rem; border: 0; background: transparent; color: var(--text-secondary); cursor: pointer; }
+.permission-field { display: grid; gap: 0.45rem; margin: 1rem 0; font-size: 0.9rem; font-weight: 600; }
+.permission-field input, .permission-field textarea {
+  width: 100%; box-sizing: border-box; padding: 0.7rem 0.8rem; border: 1px solid var(--border-base);
+  border-radius: 7px; background: var(--bg-input); color: var(--text-primary); font: inherit; font-weight: 400;
+}
+.permission-field input:focus, .permission-field textarea:focus { outline: 2px solid var(--border-focus); outline-offset: 1px; }
+.permission-field textarea { resize: vertical; }
+.permission-form-error { margin: 0.75rem 0; color: var(--btn-danger-text); font-size: 0.9rem; }
+.permission-modal-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.25rem; }
+.modal-cancel-btn { padding: 0.7rem 1rem; border: 1px solid var(--border-base); border-radius: 8px; background: var(--bg-card); color: var(--text-primary); font-weight: 600; cursor: pointer; }
+.modal-cancel-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
 .give-permissions-btn:hover:not(:disabled) {
   background: var(--btn-primary-hover);
   transform: translateY(-1px);
