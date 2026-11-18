@@ -1,7 +1,16 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+export const isStudentRole = (role: unknown) =>
+  String(role || "").trim().toUpperCase() === "STUDENT";
+
+const ProtectedRoute = ({
+  children,
+  area,
+}: {
+  children: React.ReactNode;
+  area?: "student" | "staff";
+}) => {
   const { user, initialized } = useSelector(
     (state: any) => state.auth
   );
@@ -13,6 +22,14 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   // User is not authenticated
   if (!user) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (area === "student" && !isStudentRole(user.role)) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  if (area === "staff" && isStudentRole(user.role)) {
+    return <Navigate to="/student-dashboard" replace />;
   }
 
   return <>{children}</>;

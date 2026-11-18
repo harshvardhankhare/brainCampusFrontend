@@ -1,0 +1,49 @@
+.student-shell {
+  --student-ink: #1c322f;
+  --student-muted: #71817c;
+  --student-green: #28785f;
+  --student-line: #e8eeeb;
+  min-height: 100vh;
+  background: #f6f8f6;
+  color: var(--student-ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.student-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 20; display: flex; width: 254px; flex-direction: column; padding: 1.5rem 1.1rem 1rem; background: #fff; border-right: 1px solid var(--student-line); }
+.student-brand { display: flex; align-items: center; gap: .7rem; padding: .2rem .55rem 2.1rem; font-weight: 760; letter-spacing: -.035em; }
+.student-brand-mark { display: grid; width: 2.45rem; height: 2.45rem; flex: 0 0 auto; place-items: center; border-radius: .85rem; background: #e4f2e9; color: var(--student-green); }
+.student-brand-sub { display: block; margin-top: .15rem; color: #8b9a94; font-size: .58rem; letter-spacing: .13em; }
+.student-close-menu { display: none; margin-left: auto; border: 0; background: none; color: #53645d; }
+.student-nav-label { padding: 0 .75rem .7rem; color: #9aa7a1; font-size: .65rem; font-weight: 800; letter-spacing: .14em; }
+.student-nav { display: grid; gap: .35rem; }
+.student-nav a { display: flex; align-items: center; gap: .85rem; min-height: 2.9rem; padding: 0 .8rem; border-radius: .75rem; color: #65756e; font-size: .9rem; font-weight: 600; text-decoration: none; transition: background .15s, color .15s; }
+.student-nav a:hover { background: #f4f8f5; color: var(--student-green); }
+.student-nav a.active { background: #eaf4ed; color: #216b54; }
+.student-sidebar-bottom { margin-top: auto; padding: 1rem .35rem 0; border-top: 1px solid var(--student-line); }
+.student-sidebar-user { display: flex; align-items: center; gap: .7rem; padding: .35rem .4rem .9rem; }
+.student-avatar { display: grid; width: 2.1rem; height: 2.1rem; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #dcefe5; color: #286c56; font-size: .85rem; font-weight: 750; }
+.student-sidebar-user-name { overflow: hidden; color: #465851; font-size: .82rem; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+.student-signout { display: flex; align-items: center; gap: .7rem; width: 100%; padding: .7rem .55rem; border: 0; border-radius: .65rem; background: transparent; color: #78857f; font: inherit; font-size: .83rem; cursor: pointer; }
+.student-signout:hover { background: #f8f2f1; color: #a44b42; }
+.student-main { min-height: 100vh; margin-left: 254px; }
+.student-topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; height: 70px; padding: 0 clamp(1.2rem, 4vw, 3.2rem); border-bottom: 1px solid var(--student-line); background: rgba(255,255,255,.94); backdrop-filter: blur(12px); }
+.student-crumb { display: flex; align-items: center; gap: .55rem; color: #95a19b; font-size: .8rem; }
+.student-crumb strong { color: #52635c; font-weight: 650; }
+.student-crumb-dot { color: #bac5bf; }
+.student-topbar-user { display: flex; align-items: center; gap: .6rem; color: #52635c; font-size: .82rem; font-weight: 650; }
+.student-topbar-user .student-avatar { width: 2rem; height: 2rem; }
+.student-menu-button { display: none; border: 0; background: transparent; color: #43564e; }
+.student-content { width: min(1120px, 100%); box-sizing: border-box; margin: 0 auto; padding: clamp(1.4rem, 4vw, 3rem); }
+.student-footer { padding: .3rem 2rem 1.5rem; color: #9aa59f; text-align: center; font-size: .72rem; }
+.student-footer span { padding: 0 .35rem; }
+.student-backdrop { display: none; }
+@media (max-width: 760px) {
+  .student-sidebar { transform: translateX(-100%); transition: transform .2s ease; box-shadow: 8px 0 30px rgba(28,50,47,.08); }
+  .student-sidebar.is-open { transform: translateX(0); }
+  .student-close-menu, .student-menu-button { display: inline-flex; align-items: center; justify-content: center; }
+  .student-main { margin-left: 0; }
+  .student-topbar { justify-content: flex-start; gap: .85rem; height: 62px; }
+  .student-topbar-user { margin-left: auto; }
+  .student-topbar-user > span:last-child { display: none; }
+  .student-backdrop { position: fixed; inset: 0; z-index: 19; display: block; border: 0; background: rgba(20,35,31,.35); }
+}
+@media (prefers-reduced-motion: reduce) { .student-nav a, .student-sidebar { transition: none; } }
