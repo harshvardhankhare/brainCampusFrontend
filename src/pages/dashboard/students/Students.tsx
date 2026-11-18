@@ -11,7 +11,6 @@ import {
 } from "react-icons/fa";
 
 import api from "../../../api/axios";
-import { studentApi } from "../../../api/studentApi/studentApi.js";
 import "./Students.css";
 
 interface SchoolClass {
@@ -39,11 +38,12 @@ const Students: React.FC = () => {
   const [classes, setClasses] = useState<SchoolClass[]>([]);
   const [academicYears, setAcademicYears] = useState<AcademicYear[]>([]);
   const [loadingFilters, setLoadingFilters] = useState<boolean>(true);
+  const [loadingClasses, setLoadingClasses] = useState<boolean>(false);
 
   const [filters, setFilters] = useState({
+    year: "",
     className: "",
     section: "",
-    year: "",
   });
 
   const [showAddFeeModal, setShowAddFeeModal] = useState<boolean>(false);
@@ -54,12 +54,7 @@ const Students: React.FC = () => {
       try {
         setLoadingFilters(true);
 
-        const [classesResponse, yearsResponse] = await Promise.all([
-          api.get("/classes"),
-          api.get("/academic-years"),
-        ]);
-
-        setClasses(classesResponse.data.data || []);
+        const yearsResponse = await api.get("/academic-years");
         setAcademicYears(yearsResponse.data.data || []);
       } catch (err) {
         console.error("Failed to load filters:", err);
@@ -70,6 +65,35 @@ const Students: React.FC = () => {
 
     fetchFilters();
   }, []);
+
+  useEffect(() => {
+    if (!filters.year) {
+      setClasses([]);
+      setLoadingClasses(false);
+      return;
+    }
+
+    let cancelled = false;
+    const fetchClasses = async () => {
+      try {
+        setLoadingClasses(true);
+        const response = await api.get("/classes", {
+          params: { academicYear: filters.year },
+        });
+        if (!cancelled) setClasses(response.data.data || []);
+      } catch (err) {
+        if (!cancelled) {
+          setClasses([]);
+          console.error("Failed to load classes:", err);
+        }
+      } finally {
+        if (!cancelled) setLoadingClasses(false);
+      }
+    };
+
+    fetchClasses();
+    return () => { cancelled = true; };
+  }, [filters.year]);
 
   const [feeForm, setFeeForm] = useState({
     rollNo: "",
@@ -126,7 +150,10 @@ const Students: React.FC = () => {
 
     setFilters((prev) => {
       const updatedFilters = { ...prev, [name]: value };
-      if (name === "className") {
+      if (name === "year") {
+        updatedFilters.className = "";
+        updatedFilters.section = "";
+      } else if (name === "className") {
         updatedFilters.section = "";
       }
       return updatedFilters;
@@ -300,12 +327,34 @@ const Students: React.FC = () => {
           <div>
             <h2 className="filter-title">Find Students</h2>
             <p className="filter-subtitle">
-              Select class, section and academic year to view the student list
+              Select an academic year, class and section to view the student list
             </p>
           </div>
         </div>
 
         <div className="filter-row">
+          {/* Academic year */}
+          <div className="filter-group">
+            <label htmlFor="year">Academic Year</label>
+            <select
+              id="year"
+              name="year"
+              value={filters.year}
+              onChange={handleChange}
+              className="filter-select"
+              disabled={loadingFilters}
+            >
+              <option value="">
+                {loadingFilters ? "Loading Years..." : "Select Year"}
+              </option>
+              {academicYears.map((academicYear) => (
+                <option key={academicYear.id} value={academicYear.name}>
+                  {academicYear.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Class */}
           <div className="filter-group">
             <label htmlFor="className">Class</label>
@@ -315,10 +364,14 @@ const Students: React.FC = () => {
               value={filters.className}
               onChange={handleChange}
               className="filter-select"
-              disabled={loadingFilters}
+              disabled={!filters.year || loadingClasses}
             >
               <option value="">
-                {loadingFilters ? "Loading Classes..." : "Select Class"}
+                {!filters.year
+                  ? "Select Year First"
+                  : loadingClasses
+                    ? "Loading Classes..."
+                    : "Select Class"}
               </option>
               {classNames.map((className) => (
                 <option key={className} value={className}>
@@ -337,7 +390,7 @@ const Students: React.FC = () => {
               value={filters.section}
               onChange={handleChange}
               className="filter-select"
-              disabled={loadingFilters || !filters.className}
+              disabled={!filters.className || loadingClasses}
             >
               <option value="">
                 {!filters.className ? "Select Class First" : "Select Section"}
@@ -345,28 +398,6 @@ const Students: React.FC = () => {
               {sections.map((section) => (
                 <option key={section} value={section}>
                   {section}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Year */}
-          <div className="filter-group">
-            <label htmlFor="year">Academic Year</label>
-            <select
-              id="year"
-              name="year"
-              value={filters.year}
-              onChange={handleChange}
-              className="filter-select"
-              disabled={loadingFilters}
-            >
-              <option value="">
-                {loadingFilters ? "Loading Years..." : "Select Year"}
-              </option>
-              {academicYears.map((academicYear) => (
-                <option key={academicYear.id} value={academicYear.name}>
-                  {academicYear.name}
                 </option>
               ))}
             </select>
