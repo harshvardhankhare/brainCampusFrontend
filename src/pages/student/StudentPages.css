@@ -1,0 +1,76 @@
+.student-page { color: #203630; }
+.student-welcome { position: relative; display: flex; min-height: 265px; align-items: center; justify-content: space-between; overflow: hidden; padding: clamp(1.6rem, 4vw, 3.1rem); border-radius: 1.35rem; background: linear-gradient(112deg, #e6f3e9 0%, #f0f6e8 60%, #f8f4dd 100%); }
+.student-welcome-copy { position: relative; z-index: 1; max-width: 600px; }
+.student-kicker { color: #4f8a70; font-size: .67rem; font-weight: 800; letter-spacing: .15em; }
+.student-welcome h1 { margin: .9rem 0 .6rem; color: #1e3f34; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.2rem, 4vw, 3.35rem); font-weight: 500; letter-spacing: -.055em; line-height: 1.08; }
+.student-welcome h1 span { color: #b98537; font-family: sans-serif; font-size: .65em; }
+.student-welcome p { margin: 0; color: #667c70; font-size: .96rem; line-height: 1.6; }
+.student-tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.2rem; }
+.student-tags span { padding: .38rem .65rem; border: 1px solid rgba(57,117,89,.16); border-radius: 100px; background: rgba(255,255,255,.54); color: #527461; font-size: .73rem; font-weight: 650; }
+.student-welcome-art { position: relative; width: 240px; height: 220px; flex: 0 0 auto; margin: 0 1rem 0 2rem; }
+.art-sun { position: absolute; top: 14px; right: 20px; width: 130px; height: 130px; border-radius: 50%; background: #f1d486; opacity: .75; }
+.art-book { position: absolute; right: 33px; bottom: 18px; display: grid; width: 150px; height: 105px; place-items: center; transform: rotate(-7deg); border-radius: 18px 18px 30px 15px; background: #fffdf5; box-shadow: 0 18px 34px rgba(60,93,70,.14); color: #578b71; }
+.art-star { position: absolute; top: 17px; left: 4px; color: #d3944b; font-size: 2rem; }
+.student-section-heading { display: flex; align-items: end; justify-content: space-between; margin: 2.3rem 0 1rem; }
+.student-section-heading h2 { margin: .4rem 0 0; color: #294038; font-size: 1.22rem; letter-spacing: -.03em; }
+.student-quick-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.student-quick-card { display: flex; min-height: 190px; flex-direction: column; align-items: flex-start; padding: 1.35rem; border: 1px solid #e8eeeb; border-radius: 1rem; background: #fff; color: inherit; text-decoration: none; transition: transform .16s, box-shadow .16s; }
+.student-quick-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(29,64,50,.07); }
+.student-quick-icon { display: grid; width: 2.55rem; height: 2.55rem; margin-bottom: 1rem; place-items: center; border-radius: .8rem; background: #eaf4ed; color: #3c8064; }
+.fees-quick .student-quick-icon { background: #f6f0df; color: #a77c32; }
+.student-quick-label { color: #89978f; font-size: .63rem; font-weight: 800; letter-spacing: .13em; }
+.student-quick-card strong { margin-top: .45rem; font-size: .98rem; font-weight: 680; }
+.student-quick-action { display: flex; align-items: center; gap: .4rem; margin-top: auto; padding-top: 1rem; color: #34765c; font-size: .8rem; font-weight: 700; }
+.student-note-card { display: flex; align-items: center; gap: .9rem; margin-top: 1rem; padding: 1rem 1.15rem; border: 1px solid #e8eeeb; border-radius: .9rem; background: rgba(255,255,255,.74); }
+.student-note-icon { display: grid; width: 2.5rem; height: 2.5rem; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #f2f3e5; color: #88854e; }
+.student-note-card strong { color: #44584e; font-size: .86rem; }
+.student-note-card p { margin: .25rem 0 0; color: #829087; font-size: .78rem; line-height: 1.5; }
+.student-route-key { display: none; }
+.student-page-header { margin: .2rem 0 1.5rem; }
+.student-page-header h1 { margin: .45rem 0 .35rem; color: #243d34; font-family: Georgia, "Times New Roman", serif; font-size: 2.35rem; font-weight: 500; letter-spacing: -.05em; }
+.student-page-header p { margin: 0; color: #7b8982; font-size: .9rem; }
+.student-profile-card { overflow: hidden; border: 1px solid #e7eeea; border-radius: 1rem; background: #fff; }
+.student-profile-banner { height: 100px; background: linear-gradient(105deg, #d9eee1, #edf3df 72%, #f8efd5); }
+.student-profile-main { display: flex; align-items: center; gap: 1rem; margin: -2rem 1.5rem 0; }
+.student-profile-avatar { display: grid; width: 4rem; height: 4rem; flex: 0 0 auto; place-items: center; border: 4px solid #fff; border-radius: 50%; background: #dcefe5; color: #286c56; font-size: 1.1rem; font-weight: 800; }
+.student-profile-main h2 { margin: 1.35rem 0 .25rem; color: #294038; font-size: 1.1rem; }
+.student-profile-main p { margin: 0; color: #89958f; font-size: .8rem; }
+.student-status { display: inline-flex; align-items: center; gap: .4rem; margin: 1.3rem 0 0 auto; padding: .4rem .65rem; border-radius: 99px; background: #edf7f0; color: #438062; font-size: .7rem; font-weight: 700; }
+.student-status i { width: 6px; height: 6px; border-radius: 50%; background: #55a773; }
+.student-profile-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: 1.6rem; border-top: 1px solid #edf1ee; background: #edf1ee; }
+.student-profile-field { display: flex; align-items: center; gap: .75rem; min-height: 76px; padding: .75rem 1.25rem; background: #fff; }
+.student-field-icon { display: grid; width: 2rem; height: 2rem; flex: 0 0 auto; place-items: center; border-radius: .65rem; background: #f1f6f2; color: #52806a; }
+.student-profile-field div { display: grid; gap: .25rem; min-width: 0; }
+.student-profile-field div span { color: #91a098; font-size: .72rem; }
+.student-profile-field strong { overflow: hidden; color: #40554b; font-size: .84rem; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+.student-profile-hint, .student-fees-contact { margin: 1rem 0 0; color: #87948d; font-size: .78rem; line-height: 1.55; }
+.student-empty { display: grid; min-height: 230px; align-content: center; justify-items: center; padding: 2rem; border: 1px dashed #d8e4dc; border-radius: 1rem; background: #fff; text-align: center; }
+.student-empty-icon { display: grid; width: 3rem; height: 3rem; margin-bottom: .6rem; place-items: center; border-radius: 50%; background: #edf6ef; color: #538469; }
+.student-empty h2 { margin: .5rem 0; color: #395248; font-size: 1.05rem; }
+.student-empty p { max-width: 420px; margin: .25rem 0 0; color: #819087; font-size: .85rem; line-height: 1.6; }
+.student-fee-summary { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .85rem; margin-bottom: 1rem; }
+.student-fee-summary article { display: grid; gap: .55rem; padding: 1.1rem; border: 1px solid #e8eeeb; border-radius: .9rem; background: #fff; }
+.student-fee-summary article > span { color: #85928b; font-size: .77rem; }
+.student-fee-summary article strong { color: #344e42; font-size: 1.4rem; letter-spacing: -.04em; }
+.student-fee-summary article small { color: #99a49e; font-size: .7rem; }
+.student-fee-summary .paid-summary strong { color: #39805e; }
+.student-fee-summary .pending-summary strong { color: #b17a32; }
+.student-fee-list { overflow: hidden; border: 1px solid #e8eeeb; border-radius: .9rem; background: #fff; }
+.student-fee-list-heading { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.2rem; border-bottom: 1px solid #edf1ee; }
+.student-fee-list-heading h2 { margin: 0; color: #3a5046; font-size: .95rem; }
+.student-fee-list-heading span { color: #8a9890; font-size: .75rem; }
+.student-fee-empty { padding: 2.5rem 1rem; color: #8a9890; text-align: center; font-size: .84rem; }
+.student-fee-table-wrap { overflow-x: auto; }
+.student-fee-table { width: 100%; border-collapse: collapse; text-align: left; }
+.student-fee-table th { padding: .75rem 1rem; background: #f8faf8; color: #91a098; font-size: .68rem; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.student-fee-table td { padding: .9rem 1rem; border-top: 1px solid #f0f3f1; color: #576960; font-size: .8rem; white-space: nowrap; }
+.student-fee-table td:first-child { min-width: 160px; }
+.student-fee-table td strong, .student-fee-table td small { display: block; }
+.student-fee-table td strong { color: #42574d; font-weight: 650; }
+.student-fee-table td small { margin-top: .25rem; color: #98a49d; font-size: .68rem; }
+.student-fee-status { display: inline-flex; padding: .3rem .55rem; border-radius: 99px; font-size: .68rem; font-weight: 700; }
+.student-fee-status.paid { background: #eaf5ed; color: #41805c; }
+.student-fee-status.partial { background: #fbf3df; color: #a77b32; }
+.student-fee-status.pending { background: #f4efed; color: #8c6c60; }
+@media(max-width: 800px) { .student-welcome-art { margin-right: -1.5rem; transform: scale(.85); transform-origin: right center; } }
+@media(max-width: 600px) { .student-welcome { min-height: auto; padding: 1.5rem; } .student-welcome-art { position: absolute; right: -4.5rem; bottom: -1rem; opacity: .3; } .student-welcome-copy { max-width: 100%; } .student-quick-grid, .student-profile-fields { grid-template-columns: 1fr; } .student-quick-card { min-height: 165px; } .student-profile-main { flex-wrap: wrap; margin-right: 1rem; margin-left: 1rem; } .student-status { margin-left: 4.6rem; margin-top: -.5rem; } .student-profile-field { min-height: 65px; } .student-fee-summary { grid-template-columns: 1fr; gap: .55rem; } .student-fee-summary article { grid-template-columns: 1fr auto; align-items: center; gap: .25rem .8rem; } .student-fee-summary article strong { grid-column: 2; grid-row: 1 / span 2; } .student-fee-summary article small { grid-column: 1; } }
