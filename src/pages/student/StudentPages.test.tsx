@@ -38,9 +38,9 @@ describe('student portal pages', () => {
     ] } } as never);
     renderWithProviders(<StudentFees />, { user: { studentId: 'student-1' } });
     expect(await screen.findByText('Tuition')).toBeInTheDocument();
-    expect(screen.getByText('â‚¹1,800')).toBeInTheDocument();
-    expect(screen.getByText('â‚¹1,200')).toBeInTheDocument();
-    expect(screen.getByText('â‚¹600')).toBeInTheDocument();
+    expect(screen.getByText('₹1,800')).toBeInTheDocument();
+    expect(screen.getByText('₹1,200')).toBeInTheDocument();
+    expect(screen.getByText('₹600')).toBeInTheDocument();
     expect(screen.getByText('Partial')).toBeInTheDocument();
     expect(screen.getByText('Pending')).toBeInTheDocument();
     expect(api.get).toHaveBeenCalledWith('/student-fees/student/student-1');
