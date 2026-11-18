@@ -1,5 +1,6 @@
 import {Routes, Route, Navigate} from 'react-router-dom';
 import Login from "../pages/auth/Login"
+import StudentRegister from "../pages/auth/StudentRegister"
 import ProtectedRoute from '../components/common/ProtectedRoute';
 import DashboardHome from "../pages/dashboard/DashboardHome";
 import Students from "../pages/dashboard/students/Students";
@@ -12,11 +13,11 @@ import Academics from '../pages/dashboard/Academics/Academics';
 import StudentDetails from '../pages/dashboard/StudentDetail/StudentDetails';
 import TeacherAssignments from '../pages/dashboard/teachers/TeachersAssignment';
 import StudentResultDetails from '../pages/dashboard/StudentDetail/StudentResultDetails';
-import StaffList from '../pages/dashboard/staff/staffList'
+import StaffList from '../pages/dashboard/staff/StaffList'
 import AdminOptions from '../pages/Admin/AdminOptions';
 import Roles from "../pages/Admin/Roles"
 import TeacherDetails from "../pages/dashboard/teachers/TeacherDetails"
-import StudentFees from '../pages/dashboard/StudentDetail/StudentFees';
+import StaffStudentFees from '../pages/dashboard/StudentDetail/StudentFees';
 import ApiDashboard from '../pages/dashboard/ApiDashboard/ApiDashboard';
 import AuditLogViewer from '../pages/dashboard/ApiDashboard/AuditLogViewer';
 import AddFee from '../pages/dashboard/Fees/AddFee';
@@ -24,10 +25,13 @@ import FeeTypes from '../pages/dashboard/Fees/FeeTypes';
 import Settings from '../pages/dashboard/settings/Settings';
 import AddStudent from '../pages/dashboard/students/AddStudent';
 import AcademicSetup from '../pages/dashboard/Academics/AcademicSetup';
+import StudentLayout from '../components/layouts/StudentLayout';
+import { StudentHome, StudentProfile, StudentFees } from '../pages/student/StudentPages';
 const AppRoutes = () => {
   return (
     <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/student-register" element={<StudentRegister />} />
         <Route
   path="/forgot-password"
   element={<Login />}
@@ -40,7 +44,7 @@ const AppRoutes = () => {
       <Route
         path="/dashboard"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute area="staff">
             <DashboardLayout />
           </ProtectedRoute>
         }
@@ -56,7 +60,7 @@ const AppRoutes = () => {
         <Route path="teachers/assignments" element={<TeacherAssignments />}/>
         <Route path="teachers/:id" element={<TeacherDetails/>}/>
         <Route path="students/:id/results/:examId" element={<StudentResultDetails />}/>
-        <Route path="students/:id/fees" element={<StudentFees/>} />
+        <Route path="students/:id/fees" element={<StaffStudentFees/>} />
         <Route path="staff" element={<StaffList />} />
         <Route path="admin" element={<AdminOptions />} />
         <Route path="roles" element = {<Roles/>}/>
@@ -67,6 +71,18 @@ const AppRoutes = () => {
         <Route path="settings/fee-types" element={<FeeTypes />} />
         <Route path="academics/setup" element={<AcademicSetup />} />
 
+      </Route>
+      <Route
+        path="/student-dashboard"
+        element={
+          <ProtectedRoute area="student">
+            <StudentLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<StudentHome />} />
+        <Route path="profile" element={<StudentProfile />} />
+        <Route path="fees" element={<StudentFees />} />
       </Route>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="*" element={<NotFound/>} />

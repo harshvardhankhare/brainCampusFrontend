@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import { setInitialized, setUser } from "../../redux/authSlice";
 import styles from "./Login.module.css";
@@ -35,7 +35,9 @@ const Login = () => {
       dispatch(setUser(user));
       dispatch(setInitialized(true));
 
-      navigate("/dashboard");
+      navigate(String(user?.role || "").toUpperCase() === "STUDENT"
+        ? "/student-dashboard"
+        : "/dashboard");
     } catch (error: any) {
       setError(
         error.response?.data?.message ||
@@ -172,8 +174,9 @@ const Login = () => {
 
           <div className={styles.formFooter}>
             <p>
-              Don't have an account? <a href="#">Contact your administrator</a>
+              Student? <Link to="/student-register">Create your student account</Link>
             </p>
+            <p>School staff? Contact your administrator for access.</p>
           </div>
         </div>
       </div>
